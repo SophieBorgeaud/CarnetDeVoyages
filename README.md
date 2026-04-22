@@ -1,119 +1,84 @@
-# Carnet de voyages 🌍
+# Mon projet 122
 
-Application web de gestion de destinations de voyage développée en HTML, CSS et JavaScript.
+Projet JavaScript — Cours 122 (ESIG)
 
----
+## Description
 
-## 1. 🎨 Présentation du projet
+[Décris ton projet ici : quel type de données tu gères et pourquoi tu as choisi cette ressource]
 
-### Concept
-- Thème choisi : gestion de destinations de voyage
-- Public cible : utilisateurs souhaitant organiser et suivre leurs idées de voyages
-- Objectifs du site : permettre d’ajouter, rechercher, trier et supprimer des destinations facilement
+## Lien GitHub Pages
 
-### Fonctionnalités prévues
-- Recherche en temps réel des destinations
-- Tri selon différents critères (nom, pays, budget, statut)
-- Ajout de nouvelles destinations via un formulaire
-- Suppression d’une destination
-- Affichage dynamique de la liste
+[Colle ici le lien de ton site en ligne]
 
----
+## Fonctionnalités
 
-## 2. 📚 Parcours d'apprentissage
+- [ ] Affichage dynamique de la liste
+- [ ] Tri par plusieurs critères
+- [ ] Recherche en temps réel
+- [ ] Ajout via formulaire
+- [ ] Suppression d'éléments
+- [ ] Responsive (mobile + desktop)
 
-### Ressources utilisées
-- Documentation MDN
-- Supports de cours ESIG
-- Aide ponctuelle via ChatGPT
+## Captures d'écran
 
-### Progression
-- Mise en place de la structure HTML/CSS
-- Création du tableau d’objets JavaScript
-- Manipulation du DOM (affichage dynamique)
-- Implémentation de la recherche et du tri
-- Ajout et suppression d’éléments
+[Ajoute des captures de ton projet ici]
 
----
+## Transparence IA
 
-## 3. 🛠️ Outils et méthodologie
+### Outils utilisés
+[Quels outils d'IA as-tu utilisés ? (Copilot, ChatGPT, Claude, etc.)]
 
-### Environnement de travail
-- IDE : WebStorm
-- Navigateurs de test : Chrome
-- Versioning : Git + GitHub
-- Déploiement : GitHub Pages
+### Prompts utilisés
+[Copie ici les prompts importants que tu as donnés à l'IA]
 
-### Méthodologie
-- Développement progressif (fonctionnalité par fonctionnalité)
-- Tests réguliers en local
-- Organisation claire du code
-
-### Choix de design
-- Palette de couleurs :
-    - Couleur principale : bleu profond – évoque le voyage et la confiance
-    - Couleur secondaire : turquoise – fraîcheur et évasion
-    - Couleur d’accent : sable / corail – rappel des destinations
-    - Couleur de texte : gris foncé
-    - Couleur de fond : clair
-- Design moderne, épuré et inspiré du voyage
+### Ce que j'ai appris vs ce que l'IA a généré
+[Explique ce que tu as écrit toi-même et ce que l'IA a produit. Qu'as-tu appris en utilisant l'IA ?]
 
 ---
 
-## 4. ✅ Tests et validation
+<details>
+<summary>📋 Exemple — Projet "Jeux Vidéo"</summary>
 
-### Validation technique
-- Test manuel du bon fonctionnement :
-    - recherche dynamique
-    - tri
-    - ajout
-    - suppression
+> Cet exemple montre à quoi pourrait ressembler un README complété.
+> **Supprime cet encart** quand tu remplis ton propre README.
 
-### Compatibilité
-- Navigateur testé : Chrome
-- Affichage adapté aux différentes tailles d’écran (responsive simple)
+## Description
 
-### Accessibilité
-- Structure HTML claire
-- Bon contraste des couleurs
-- Interface simple et lisible
+Application web pour gérer ma collection de jeux vidéo. J'ai choisi cette
+ressource car je suis passionné de gaming et je voulais un catalogue personnel
+pour trier mes jeux par note et plateforme.
 
----
+## Lien GitHub Pages
 
-## 5. 🤖 Usage de l’IA
+https://mon-pseudo.github.io/esig-122-jeux-video/
 
-### IA utilisée
-- ChatGPT (assistance)
+## Fonctionnalités
 
-### Utilisation détaillée
-- Aide à la structuration du projet
-- Suggestions de design et de logique JavaScript
-- Vérification et compréhension du code
+- [x] Affichage dynamique de la liste (cartes avec image, nom, catégorie, note)
+- [x] Tri par nom, note et année
+- [x] Recherche en temps réel par nom
+- [x] Ajout d'un jeu via formulaire
+- [x] Suppression avec confirmation
+- [x] Responsive (mobile + desktop)
 
-### Adaptation personnelle
-- Compréhension et modification du code généré
-- Implémentation et ajustements réalisés manuellement
+## Captures d'écran
 
----
+![Aperçu desktop](img/screenshot-desktop.png)
+![Aperçu mobile](img/screenshot-mobile.png)
 
-## 6. 🎯 Bilan personnel
+## Transparence IA
 
-### Ce que j’ai appris
-- Manipulation du DOM en JavaScript
-- Gestion d’une collection de données côté client
-- Interaction utilisateur (recherche, tri, formulaire)
-- Organisation d’un projet web
+### Outils utilisés
+- GitHub Copilot (dans WebStorm) pour la génération des données et l'autocomplétion
+- ChatGPT pour comprendre `Array.sort()` avec `localeCompare()`
 
-### Difficultés rencontrées
-- Compréhension des interactions entre JavaScript et le DOM
-- Mise en place du tri et de la recherche dynamique
+### Prompts utilisés
+- "Génère un tableau de 10 jeux vidéo avec id, name, category, platform, rating, year, image"
+- "Explique-moi comment trier un tableau d'objets par une propriété texte en JavaScript"
 
-### Réussites et fiertés
-- Application fonctionnelle et complète
-- Interface claire et agréable
-- Bonne compréhension globale du fonctionnement
+### Ce que j'ai appris vs ce que l'IA a généré
+- **Généré par l'IA** : le tableau de données initial (10 objets)
+- **Écrit par moi** : toute la logique d'affichage, tri, recherche, ajout et suppression
+- **Appris grâce à l'IA** : j'ai compris comment `localeCompare()` gère les accents en français
 
-### Améliorations possibles
-- Ajout de filtres avancés
-- Sauvegarde des données (localStorage ou base de données)
-- Amélioration du design et des animations
+</details>
