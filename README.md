@@ -63,8 +63,8 @@ https://mon-pseudo.github.io/esig-122-jeux-video/
 
 ## Captures d'écran
 
-![Aperçu desktop](img/screenshot-desktop.png)
-![Aperçu mobile](img/screenshot-mobile.png)
+![Aperçu desktop]
+![Aperçu mobile]
 
 ## Transparence IA
 
