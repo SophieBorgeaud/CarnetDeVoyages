@@ -4,7 +4,7 @@ Projet JavaScript — Cours 122 (ESIG)
 
 ## Description
 
-[Décris ton projet ici : quel type de données tu gères et pourquoi tu as choisi cette ressource]
+[Décris ton projet ici: quel type de données, tu gères et pourquoi tu as choisi cette ressource]
 
 ## Lien GitHub Pages
 
@@ -45,7 +45,7 @@ Projet JavaScript — Cours 122 (ESIG)
 ## Description
 
 Application web pour gérer ma collection de jeux vidéo. J'ai choisi cette
-ressource car je suis passionné de gaming et je voulais un catalogue personnel
+ressource, car je suis passionné de gaming et je voulais un catalogue personnel
 pour trier mes jeux par note et plateforme.
 
 ## Lien GitHub Pages
@@ -63,8 +63,8 @@ https://mon-pseudo.github.io/esig-122-jeux-video/
 
 ## Captures d'écran
 
-![Aperçu desktop]
-![Aperçu mobile]
+!Aperçu desktop
+!Aperçu mobile
 
 ## Transparence IA
 

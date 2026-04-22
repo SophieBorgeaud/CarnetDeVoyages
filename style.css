@@ -1,19 +1,7 @@
-/* ============================================
-   Carnet de Voyages — style.css
-   Design : moderne, lumineux, voyage & évasion
-   ============================================ */
-
-/* ============================================
-   Import des polices Google Fonts
-   - Playfair Display : titres élégants (display)
-   - DM Sans         : corps de texte lisible
-   ============================================ */
+/* Import des polices Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
 
-/* ============================================
-   Variables CSS — palette & design tokens
-   Au moins 3 couleurs, 2 polices, 3 espacements
-   ============================================ */
+/* Variables CSS */
 :root {
     /* Couleurs principales */
     --color-primary:        #1a3a5c;   /* Bleu profond — navigation, confiance */
@@ -55,9 +43,7 @@
     --transition:   0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ============================================
-   Reset de base
-   ============================================ */
+/* Reset de base */
 *,
 *::before,
 *::after {
@@ -76,9 +62,7 @@ img {
     display: block;
 }
 
-/* ============================================
-   Scrollbar personnalisée
-   ============================================ */
+/* Scrollbar personnalisée */
 ::-webkit-scrollbar {
     width: 6px;
 }
@@ -90,9 +74,7 @@ img {
     border-radius: 3px;
 }
 
-/* ============================================
-   Body — fond général
-   ============================================ */
+/* Body — fond général */
 body {
     font-family: var(--font-body);
     font-weight: 400;
@@ -100,6 +82,7 @@ body {
     line-height: 1.6;
     color: var(--color-text);
     background-color: var(--color-bg);
+
     /* Motif subtil de points — ambiance carte géographique */
     background-image: radial-gradient(
             circle,
@@ -110,9 +93,7 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* ============================================
-   Header — titre centré, identité visuelle forte
-   ============================================ */
+/* Header — titre centré */
 header {
     text-align: center;
     padding: var(--space-xl) var(--space-md) var(--space-lg);
@@ -157,7 +138,7 @@ header::after {
     );
 }
 
-/* Seul <h1> de la page — hiérarchie respectée */
+/* Seul <h1> de la page */
 header h1 {
     font-family: var(--font-display);
     font-size: clamp(2rem, 5vw, 3.2rem); /* fluide mobile → desktop */
@@ -179,18 +160,14 @@ header p {
     margin-top: var(--space-xs);
 }
 
-/* ============================================
-   Main — conteneur centré
-   ============================================ */
+/* Main — conteneur centré */
 main {
     max-width: 1200px;
     margin: 0 auto;
     padding: var(--space-lg) var(--space-lg) var(--space-xl);
 }
 
-/* ============================================
-   Section .controls — barre de recherche
-   ============================================ */
+/* Section .controls — barre de recherche */
 .controls {
     display: flex;
     flex-wrap: wrap;
@@ -209,6 +186,7 @@ main {
     font-weight: 400;
     color: var(--color-text);
     background-color: var(--color-bg-card);
+
     /* Icône loupe SVG en arrière-plan */
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7a8d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
@@ -232,9 +210,7 @@ main {
     box-shadow: 0 0 0 3px rgba(56, 178, 172, 0.18);
 }
 
-/* ============================================
-   Boutons génériques — base commune
-   ============================================ */
+/* Boutons génériques — base commune */
 button,
 .btn {
     display: inline-flex;
@@ -320,7 +296,7 @@ button.btn-filtre {
     border-color: var(--color-secondary);
 }
 
-/* Menu de tri (select natif) */
+/* Menu de tri */
 select.tri {
     font-family: var(--font-body);
     font-size: 0.875rem;
@@ -333,6 +309,7 @@ select.tri {
     cursor: pointer;
     outline: none;
     appearance: none;
+
     /* Chevron SVG personnalisé */
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7a8d' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
@@ -345,19 +322,16 @@ select.tri:focus {
     box-shadow: 0 0 0 3px rgba(56, 178, 172, 0.18);
 }
 
-/* ============================================
-   Grille de destinations — CSS Grid responsive
-   ============================================ */
+/* Grille de destinations */
 .voyage-grid {
     display: grid;
+
     /* Mobile-first : 1 colonne par défaut */
     grid-template-columns: 1fr;
     gap: var(--space-md);
 }
 
-/* ============================================
-   Animations — apparition des cartes
-   ============================================ */
+/* Animations — apparition des cartes */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -369,9 +343,7 @@ select.tri:focus {
     }
 }
 
-/* ============================================
-   Carte de destination — composant principal
-   ============================================ */
+/* Carte de destination */
 .voyage-card {
     background: var(--color-bg-card);
     border: 1px solid var(--color-border);
@@ -404,9 +376,7 @@ select.tri:focus {
     border-color: rgba(56, 178, 172, 0.4);
 }
 
-/* ============================================
-   Image de la carte — ratio portrait 3/2
-   ============================================ */
+/* Image de la carte — ratio portrait 3/2 */
 .voyage-card img,
 .voyage-card .card-image {
     width: 100%;
@@ -427,9 +397,7 @@ select.tri:focus {
     position: relative;
 }
 
-/* ============================================
-   Badge type de destination — positionné sur l'image
-   ============================================ */
+/* Badge type de destination */
 .badge-type {
     position: absolute;
     top: var(--space-sm);
@@ -447,9 +415,7 @@ select.tri:focus {
     -webkit-backdrop-filter: blur(4px);
 }
 
-/* ============================================
-   Infos de la carte
-   ============================================ */
+/* Infos de la carte */
 .card-body {
     padding: var(--space-sm) var(--space-md) var(--space-md);
     display: flex;
@@ -496,9 +462,7 @@ select.tri:focus {
     flex: 1;
 }
 
-/* ============================================
-   Badges de statut — Prévu / Visité
-   ============================================ */
+/* Badges de statut — Prévu / Visité */
 .badge-statut {
     display: inline-block;
     font-family: var(--font-body);
@@ -507,7 +471,7 @@ select.tri:focus {
     text-transform: uppercase;
     letter-spacing: 0.06em;
     padding: 0.2rem 0.6rem;
-    border-radius: 999px; /* pill */
+    border-radius: 999px;
     white-space: nowrap;
 }
 
@@ -521,9 +485,7 @@ select.tri:focus {
     color: var(--color-visite-text);
 }
 
-/* ============================================
-   Pied de carte — bouton supprimer
-   ============================================ */
+/* Pied de carte — bouton supprimer */
 .card-footer {
     display: flex;
     justify-content: flex-end;
@@ -532,9 +494,7 @@ select.tri:focus {
     border-top: 1px solid var(--color-border);
 }
 
-/* ============================================
-   Message vide — aucun résultat
-   ============================================ */
+/*  Message vide — aucun résultat */
 .message-vide {
     grid-column: 1 / -1;
     text-align: center;
@@ -545,18 +505,14 @@ select.tri:focus {
     font-size: 1.15rem;
 }
 
-/* ============================================
-   Responsive — Tablette ≥ 640px
-   ============================================ */
+/* Responsive — Tablette ≥ 640px */
 @media (min-width: 640px) {
     .voyage-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-/* ============================================
-   Responsive — Tablette large ≥ 768px
-   ============================================ */
+/* Responsive — Tablette large ≥ 768px */
 @media (min-width: 768px) {
     .controls {
         flex-wrap: nowrap;
@@ -567,27 +523,21 @@ select.tri:focus {
     }
 }
 
-/* ============================================
-   Responsive — Desktop ≥ 1024px
-   ============================================ */
+/* Responsive — Desktop ≥ 1024px */
 @media (min-width: 1024px) {
     .voyage-grid {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
-/* ============================================
-   Responsive — Grand écran ≥ 1280px
-   ============================================ */
+/* Responsive — Grand écran ≥ 1280px */
 @media (min-width: 1280px) {
     .voyage-grid {
         grid-template-columns: repeat(4, 1fr);
     }
 }
 
-/* ============================================
-   Accessibilité — focus visible pour navigation clavier
-   ============================================ */
+/* Accessibilité — focus visible pour navigation clavier */
 :focus-visible {
     outline: 3px solid var(--color-secondary);
     outline-offset: 3px;
@@ -596,4 +546,148 @@ select.tri:focus {
 /* Masquer l'outline par défaut si géré manuellement */
 :focus:not(:focus-visible) {
     outline: none;
+}
+
+/* Formulaire d'ajout */
+.formulaire-section {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-md) var(--space-lg);
+    margin-bottom: var(--space-lg);
+    box-shadow: var(--shadow-card);
+}
+
+.formulaire-titre {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: var(--color-primary);
+    margin-bottom: var(--space-md);
+}
+
+.formulaire-grille {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+/* Le champ image prend toute la largeur */
+.champ-image {
+    grid-column: 1 / -1;
+}
+
+.champ {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.champ label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-text);
+}
+
+.champ input,
+.champ select {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--color-text);
+    background: var(--color-bg);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 0.55rem 0.85rem;
+    outline: none;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.champ input:focus,
+.champ select:focus {
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 3px rgba(56, 178, 172, 0.18);
+}
+
+/* Champ en erreur */
+.champ input.invalide,
+.champ select.invalide {
+    border-color: #c0392b;
+}
+
+.erreur {
+    font-size: 0.78rem;
+    color: #c0392b;
+    min-height: 1rem;
+}
+
+/* Responsive formulaire — 1 colonne sur mobile */
+@media (max-width: 640px) {
+    .formulaire-grille {
+        grid-template-columns: 1fr;
+    }
+    .champ-image {
+        grid-column: 1;
+    }
+}
+
+/* Bouton modifier sur les cartes */
+.card-footer {
+    gap: var(--space-xs);
+}
+
+.btn-modifier {
+    background-color: transparent;
+    color: var(--color-primary);
+    border: 1.5px solid var(--color-border);
+    padding: 0.4rem 0.85rem;
+    font-size: 0.8rem;
+    border-radius: var(--radius-sm);
+}
+
+.btn-modifier:hover {
+    background-color: var(--color-accent-light);
+    border-color: var(--color-primary);
+    transform: translateY(-1px);
+}
+
+/* Fenêtre modale de modification*/
+.modale-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(26, 58, 92, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    backdrop-filter: blur(3px);
+}
+
+.modale-overlay[hidden] {
+    display: none;
+}
+
+.modale-contenu {
+    background: var(--color-bg-card);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    width: min(520px, 90vw);
+    box-shadow: var(--shadow-hover);
+}
+
+.modale-contenu h2 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: var(--color-primary);
+    margin-bottom: var(--space-md);
+}
+
+.modale-contenu .champ {
+    margin-bottom: var(--space-sm);
+}
+
+.modale-boutons {
+    display: flex;
+    gap: var(--space-sm);
+    justify-content: flex-end;
+    margin-top: var(--space-md);
 }

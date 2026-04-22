@@ -14,16 +14,171 @@
 </header>
 
 <main>
-    <!-- Barre de recherche -->
+
+    <!-- Formulaire d'ajout d'une destination -->
+    <section class="formulaire-section">
+        <h2 class="formulaire-titre">Ajouter une destination</h2>
+        <form id="formulaire-ajout" class="formulaire" novalidate>
+            <div class="formulaire-grille">
+
+                <div class="champ">
+                    <label for="champ-lieu">Lieu *</label>
+                    <input type="text" id="champ-lieu" placeholder="ex: Tokyo" required>
+                    <span class="erreur" id="erreur-lieu"></span>
+                </div>
+
+                <div class="champ">
+                    <label for="champ-pays">Pays *</label>
+                    <input type="text" id="champ-pays" placeholder="ex: Japon" required>
+                    <span class="erreur" id="erreur-pays"></span>
+                </div>
+
+                <div class="champ">
+                    <label for="champ-continent">Continent *</label>
+                    <select id="champ-continent" required>
+                        <option value="">-- Choisir --</option>
+                        <option value="Europe">Europe</option>
+                        <option value="Asie">Asie</option>
+                        <option value="Amérique du Nord">Amérique du Nord</option>
+                        <option value="Amérique du Sud">Amérique du Sud</option>
+                        <option value="Afrique">Afrique</option>
+                        <option value="Océanie">Océanie</option>
+                    </select>
+                    <span class="erreur" id="erreur-continent"></span>
+                </div>
+
+                <div class="champ">
+                    <label for="champ-type">Type *</label>
+                    <select id="champ-type" required>
+                        <option value="">-- Choisir --</option>
+                        <option value="Ville">Ville</option>
+                        <option value="Mer">Mer</option>
+                        <option value="Montagne">Montagne</option>
+                        <option value="Nature">Nature</option>
+                    </select>
+                    <span class="erreur" id="erreur-type"></span>
+                </div>
+
+                <div class="champ">
+                    <label for="champ-statut">Statut *</label>
+                    <select id="champ-statut" required>
+                        <option value="">-- Choisir --</option>
+                        <option value="Prévu">Prévu</option>
+                        <option value="Visité">Visité</option>
+                    </select>
+                    <span class="erreur" id="erreur-statut"></span>
+                </div>
+
+                <div class="champ">
+                    <label for="champ-date">Année (optionnel)</label>
+                    <input type="number" id="champ-date" placeholder="ex: 2026" min="1900" max="2100">
+                </div>
+
+                <div class="champ champ-image">
+                    <label for="champ-image">Image (optionnel)</label>
+                    <input type="text" id="champ-image" placeholder="ex: images/tokyo.jpg">
+                </div>
+
+            </div>
+            <button type="submit" class="btn-ajouter">+ Ajouter la destination</button>
+        </form>
+    </section>
+
+    <!-- Barre de recherche, filtres et tri -->
     <section class="controls">
         <input type="text" id="recherche" placeholder="Rechercher un lieu, un pays...">
+
+        <!-- Filtres par statut -->
+        <button class="btn-filtre actif" data-filtre="Tous">Tous</button>
+        <button class="btn-filtre" data-filtre="Prévu">Prévu</button>
+        <button class="btn-filtre" data-filtre="Visité">Visité</button>
+
+        <!-- Filtre par type (bonus catégorie) -->
+        <select id="filtre-type" class="tri">
+            <option value="">Tous les types</option>
+            <option value="Ville">Ville</option>
+            <option value="Mer">Mer</option>
+            <option value="Montagne">Montagne</option>
+            <option value="Nature">Nature</option>
+        </select>
+
+        <!-- Tri -->
+        <select id="tri" class="tri">
+            <option value="">Trier par...</option>
+            <option value="lieu">Lieu (A→Z)</option>
+            <option value="pays">Pays (A→Z)</option>
+            <option value="continent">Continent (A→Z)</option>
+            <option value="date">Date</option>
+            <option value="statut">Statut</option>
+        </select>
     </section>
 
     <!-- Grille de destinations -->
-    <section id="voyage-container" class="voyage-grid">
+    <section id="voyage-container" class="voyage-grid"></section>
 
-    </section>
 </main>
+
+<!-- Modale de modification (bonus) -->
+<div id="modale" class="modale-overlay" hidden>
+    <div class="modale-contenu">
+        <h2>Modifier la destination</h2>
+        <form id="formulaire-modif" novalidate>
+
+            <div class="champ">
+                <label for="modif-lieu">Lieu *</label>
+                <input type="text" id="modif-lieu" required>
+                <span class="erreur" id="erreur-modif-lieu"></span>
+            </div>
+
+            <div class="champ">
+                <label for="modif-pays">Pays *</label>
+                <input type="text" id="modif-pays" required>
+                <span class="erreur" id="erreur-modif-pays"></span>
+            </div>
+
+            <div class="champ">
+                <label for="modif-continent">Continent *</label>
+                <select id="modif-continent" required>
+                    <option value="Europe">Europe</option>
+                    <option value="Asie">Asie</option>
+                    <option value="Amérique du Nord">Amérique du Nord</option>
+                    <option value="Amérique du Sud">Amérique du Sud</option>
+                    <option value="Afrique">Afrique</option>
+                    <option value="Océanie">Océanie</option>
+                </select>
+            </div>
+
+            <div class="champ">
+                <label for="modif-type">Type *</label>
+                <select id="modif-type" required>
+                    <option value="Ville">Ville</option>
+                    <option value="Mer">Mer</option>
+                    <option value="Montagne">Montagne</option>
+                    <option value="Nature">Nature</option>
+                </select>
+            </div>
+
+            <div class="champ">
+                <label for="modif-statut">Statut *</label>
+                <select id="modif-statut" required>
+                    <option value="Prévu">Prévu</option>
+                    <option value="Visité">Visité</option>
+                </select>
+            </div>
+
+            <div class="champ">
+                <label for="modif-date">Année (optionnel)</label>
+                <input type="number" id="modif-date" min="1900" max="2100">
+            </div>
+
+            <div class="modale-boutons">
+                <button type="submit" class="btn-ajouter">Enregistrer</button>
+                <button type="button" id="btn-fermer-modale" class="btn-filtre">Annuler</button>
+            </div>
+
+        </form>
+    </div>
+</div>
 
 <script src="script.js"></script>
 </body>
