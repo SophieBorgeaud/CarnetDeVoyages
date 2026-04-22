@@ -245,25 +245,27 @@ function creerCarteDestination(destination) {
     }
 
     return `
-        <article class="voyage-card">
-            <div class="card-image-wrapper">
-                <img src="${destination.image}" alt="${destination.lieu}">
-                <span class="badge-type">${destination.type}</span>
+    <article class="voyage-card">
+        <div class="card-image-wrapper">
+            <img src="${destination.image}" alt="${destination.lieu}">
+            <span class="badge-type">${destination.type}</span>
+            <div class="card-overlay">
+                <p class="card-pays-overlay">${destination.pays} · ${destination.continent}</p>
+                ${texteDate !== "" ? `<p class="card-date-overlay">${texteDate}</p>` : ""}
             </div>
-            <div class="card-body">
-                <div class="card-header-row">
-                    <h3>${destination.lieu}</h3>
-                    <span class="badge-statut ${classeStatut}">${destination.statut}</span>
-                </div>
-                <p class="card-pays">${destination.pays} · ${destination.continent}</p>
-                ${texteDate !== "" ? `<p class="card-description">${texteDate}</p>` : ""}
-                <div class="card-footer">
-                    <button class="btn-modifier" data-id="${destination.id}">✏️ Modifier</button>
-                    <button class="btn-supprimer" data-id="${destination.id}">🗑 Supprimer</button>
-                </div>
+        </div>
+        <div class="card-body">
+            <div class="card-header-row">
+                <h3>${destination.lieu}</h3>
+                <span class="badge-statut ${classeStatut}">${destination.statut}</span>
             </div>
-        </article>
-    `;
+            <div class="card-footer">
+                <button class="btn-modifier" data-id="${destination.id}">✏️ Modifier</button>
+                <button class="btn-supprimer" data-id="${destination.id}">🗑 Supprimer</button>
+            </div>
+        </div>
+    </article>
+`;
 }
 
 
@@ -289,6 +291,7 @@ function afficherDestinations(liste) {
 function mettreAJourAffichage() {
     const liste = obtenirListeFiltreeEtTriee();
     afficherDestinations(liste);
+    mettreAJourCompteur(); // ← ajoute cette ligne
 }
 
 // Validation du formulaire — vérifie que les champs obligatoires sont remplis
@@ -453,6 +456,38 @@ document.querySelector("#formulaire-modif").addEventListener("submit", function(
 // Événement : fermeture de la modale avec le bouton Annuler
 document.querySelector("#btn-fermer-modale").addEventListener("click", function() {
     document.querySelector("#modale").hidden = true;
+});
+
+// Met à jour le compteur de destinations dans le header
+function mettreAJourCompteur() {
+    const total = destinations.length;
+    const visitees = destinations.filter(function(d) {
+        return d.statut === "Visité";
+    }).length;
+    const prevues = destinations.filter(function(d) {
+        return d.statut === "Prévu";
+    }).length;
+
+    document.querySelector("#compteur").innerHTML = `
+        <span>🌍 ${total} destinations</span>
+        <span>✅ ${visitees} visitées</span>
+        <span>🗓 ${prevues} prévues</span>
+    `;
+}
+
+// Ouvre et ferme le formulaire d'ajout au clic
+document.querySelector("#btn-toggle-formulaire").addEventListener("click", function() {
+    const contenu = document.querySelector("#formulaire-contenu");
+    const bouton = document.querySelector("#btn-toggle-formulaire");
+
+    // Si caché on affiche, si affiché on cache
+    if (contenu.hidden) {
+        contenu.hidden = false;
+        bouton.classList.add("ouvert");
+    } else {
+        contenu.hidden = true;
+        bouton.classList.remove("ouvert");
+    }
 });
 
 // Affichage initial au chargement de la page

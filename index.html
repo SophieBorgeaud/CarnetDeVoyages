@@ -9,83 +9,93 @@
 <body>
 
 <header>
-    <h1>Carnet de voyages</h1>
-    <p>Mon gestionnaire de destinations en JavaScript</p>
+    <div class="header-contenu">
+        <h1>Carnet de voyages</h1>
+        <p>Mon gestionnaire de destinations en JavaScript</p>
+        <div id="compteur" class="header-compteur"></div>
+    </div>
 </header>
 
 <main>
 
     <!-- Formulaire d'ajout d'une destination -->
     <section class="formulaire-section">
-        <h2 class="formulaire-titre">Ajouter une destination</h2>
-        <form id="formulaire-ajout" class="formulaire" novalidate>
-            <div class="formulaire-grille">
+        <button type="button" id="btn-toggle-formulaire" class="btn-toggle-formulaire">
+            <span id="icone-toggle">+</span> Ajouter une destination
+        </button>
 
-                <div class="champ">
-                    <label for="champ-lieu">Lieu *</label>
-                    <input type="text" id="champ-lieu" placeholder="ex: Tokyo" required>
-                    <span class="erreur" id="erreur-lieu"></span>
+        <div id="formulaire-contenu" class="formulaire-contenu" hidden>
+            <h2 class="formulaire-titre">Nouvelle destination</h2>
+            <form id="formulaire-ajout" class="formulaire" novalidate>
+                <div class="formulaire-grille">
+
+                    <div class="champ">
+                        <label for="champ-lieu">Lieu *</label>
+                        <input type="text" id="champ-lieu" placeholder="ex: Tokyo" required>
+                        <span class="erreur" id="erreur-lieu"></span>
+                    </div>
+
+                    <div class="champ">
+                        <label for="champ-pays">Pays *</label>
+                        <input type="text" id="champ-pays" placeholder="ex: Japon" required>
+                        <span class="erreur" id="erreur-pays"></span>
+                    </div>
+
+                    <div class="champ">
+                        <label for="champ-continent">Continent *</label>
+                        <select id="champ-continent" required>
+                            <option value="">-- Choisir --</option>
+                            <option value="Europe">Europe</option>
+                            <option value="Asie">Asie</option>
+                            <option value="Amérique du Nord">Amérique du Nord</option>
+                            <option value="Amérique du Sud">Amérique du Sud</option>
+                            <option value="Afrique">Afrique</option>
+                            <option value="Océanie">Océanie</option>
+                        </select>
+                        <span class="erreur" id="erreur-continent"></span>
+                    </div>
+
+                    <div class="champ">
+                        <label for="champ-type">Type *</label>
+                        <select id="champ-type" required>
+                            <option value="">-- Choisir --</option>
+                            <option value="Ville">Ville</option>
+                            <option value="Mer">Mer</option>
+                            <option value="Montagne">Montagne</option>
+                            <option value="Nature">Nature</option>
+                        </select>
+                        <span class="erreur" id="erreur-type"></span>
+                    </div>
+
+                    <div class="champ">
+                        <label for="champ-statut">Statut *</label>
+                        <select id="champ-statut" required>
+                            <option value="">-- Choisir --</option>
+                            <option value="Prévu">Prévu</option>
+                            <option value="Visité">Visité</option>
+                        </select>
+                        <span class="erreur" id="erreur-statut"></span>
+                    </div>
+
+                    <div class="champ">
+                        <label for="champ-date">Année (optionnel)</label>
+                        <input type="number" id="champ-date" placeholder="ex: 2026" min="1900" max="2100">
+                    </div>
+
+                    <div class="champ champ-image">
+                        <label for="champ-image">Image (optionnel)</label>
+                        <input type="text" id="champ-image" placeholder="ex: images/tokyo.jpg">
+                    </div>
+
                 </div>
-
-                <div class="champ">
-                    <label for="champ-pays">Pays *</label>
-                    <input type="text" id="champ-pays" placeholder="ex: Japon" required>
-                    <span class="erreur" id="erreur-pays"></span>
-                </div>
-
-                <div class="champ">
-                    <label for="champ-continent">Continent *</label>
-                    <select id="champ-continent" required>
-                        <option value="">-- Choisir --</option>
-                        <option value="Europe">Europe</option>
-                        <option value="Asie">Asie</option>
-                        <option value="Amérique du Nord">Amérique du Nord</option>
-                        <option value="Amérique du Sud">Amérique du Sud</option>
-                        <option value="Afrique">Afrique</option>
-                        <option value="Océanie">Océanie</option>
-                    </select>
-                    <span class="erreur" id="erreur-continent"></span>
-                </div>
-
-                <div class="champ">
-                    <label for="champ-type">Type *</label>
-                    <select id="champ-type" required>
-                        <option value="">-- Choisir --</option>
-                        <option value="Ville">Ville</option>
-                        <option value="Mer">Mer</option>
-                        <option value="Montagne">Montagne</option>
-                        <option value="Nature">Nature</option>
-                    </select>
-                    <span class="erreur" id="erreur-type"></span>
-                </div>
-
-                <div class="champ">
-                    <label for="champ-statut">Statut *</label>
-                    <select id="champ-statut" required>
-                        <option value="">-- Choisir --</option>
-                        <option value="Prévu">Prévu</option>
-                        <option value="Visité">Visité</option>
-                    </select>
-                    <span class="erreur" id="erreur-statut"></span>
-                </div>
-
-                <div class="champ">
-                    <label for="champ-date">Année (optionnel)</label>
-                    <input type="number" id="champ-date" placeholder="ex: 2026" min="1900" max="2100">
-                </div>
-
-                <div class="champ champ-image">
-                    <label for="champ-image">Image (optionnel)</label>
-                    <input type="text" id="champ-image" placeholder="ex: images/tokyo.jpg">
-                </div>
-
-            </div>
-            <button type="submit" class="btn-ajouter">+ Ajouter la destination</button>
-        </form>
+                <button type="submit" class="btn-ajouter">+ Ajouter la destination</button>
+            </form>
+        </div>
     </section>
 
     <!-- Barre de recherche, filtres et tri -->
     <section class="controls">
+        <label for="recherche" class="sr-only">Rechercher</label>
         <input type="text" id="recherche" placeholder="Rechercher un lieu, un pays...">
 
         <!-- Filtres par statut -->
@@ -94,6 +104,7 @@
         <button class="btn-filtre" data-filtre="Visité">Visité</button>
 
         <!-- Filtre par type (bonus catégorie) -->
+        <label for="filtre-type" class="sr-only">Filtrer par type</label>
         <select id="filtre-type" class="tri">
             <option value="">Tous les types</option>
             <option value="Ville">Ville</option>
@@ -103,6 +114,7 @@
         </select>
 
         <!-- Tri -->
+        <label for="tri" class="sr-only">Trier par</label>
         <select id="tri" class="tri">
             <option value="">Trier par...</option>
             <option value="lieu">Lieu (A→Z)</option>
