@@ -490,5 +490,21 @@ document.querySelector("#btn-toggle-formulaire").addEventListener("click", funct
     }
 });
 
+// Remet tous les filtres, la recherche et le tri à zéro en un clic
+document.querySelector("#btn-reinitialiser").addEventListener("click", function() {
+    // Je vide la barre de recherche
+    document.querySelector("#recherche").value = "";
+
+    // Je remets le filtre statut sur "Tous"
+    boutonsFiltres.forEach(function(b) { b.classList.remove("actif"); });
+    document.querySelector("[data-filtre='Tous']").classList.add("actif");
+
+    // Je remets les selects sur leur valeur par défaut
+    document.querySelector("#filtre-type").value = "";
+    document.querySelector("#tri").value = "";
+
+    mettreAJourAffichage();
+});
+
 // Affichage initial au chargement de la page
 mettreAJourAffichage();
