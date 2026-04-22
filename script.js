@@ -508,3 +508,6 @@ document.querySelector("#btn-reinitialiser").addEventListener("click", function(
 
 // Affichage initial au chargement de la page
 mettreAJourAffichage();
+
+// Met à jour automatiquement l'année du copyright
+document.querySelector("#annee").textContent = new Date().getFullYear();

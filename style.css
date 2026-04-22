@@ -839,3 +839,21 @@ header {
     color: #ffffff;
     margin-top: 0.15rem;
 }
+
+footer {
+    text-align: center;
+    padding: var(--space-md);
+    background: linear-gradient(
+            135deg,
+            var(--color-primary),
+            var(--color-primary-light),
+            #1e6ea8,
+            var(--color-secondary)
+    );
+    background-size: 300% 300%;
+    animation: gradientShift 8s ease infinite;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.85rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+}
