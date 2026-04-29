@@ -1,582 +1,172 @@
-/* Import des polices Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+/* Import police Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500;600&display=swap');
 
-/* Variables CSS */
+/* Variables CSS — couleurs, polices, espacements */
 :root {
-    /* Couleurs principales */
-    --color-primary:        #1a3a5c;   /* Bleu profond — navigation, confiance */
-    --color-primary-light:  #2a5298;   /* Bleu moyen — hover, focus */
-    --color-secondary:      #38b2ac;   /* Turquoise — fraîcheur, évasion */
-    --color-accent:         #e8956d;   /* Corail/sable — chaleur, destinations */
-    --color-accent-light:   #fde8dc;   /* Corail très clair — fond badges */
+    /* Couleurs */
+    --couleur-principale:    #1a3a5c;
+    --couleur-secondaire:    #2a5298;
+    --couleur-accent:        #38b2ac;
+    --couleur-corail:        #e8956d;
+    --couleur-fond:          #f5f7fa;
+    --couleur-carte:         #ffffff;
+    --couleur-texte:         #1e2a38;
+    --couleur-texte-discret: #6b7a8d;
+    --couleur-bordure:       #dde3ec;
 
-    /* Fonds & textes */
-    --color-bg:             #f5f7fa;   /* Gris très clair — fond principal */
-    --color-bg-card:        #ffffff;   /* Blanc pur — cartes */
-    --color-text:           #1e2a38;   /* Gris anthracite — texte principal */
-    --color-text-muted:     #6b7a8d;   /* Gris moyen — texte secondaire */
-    --color-border:         #dde3ec;   /* Gris bleuté clair — bordures */
-
-    /* Badges statut */
-    --color-prevu-bg:       #e8f4fd;
-    --color-prevu-text:     #1a6fa8;
-    --color-visite-bg:      #e6f7f1;
-    --color-visite-text:    #1a7a50;
+    /* Couleurs badges statut */
+    --couleur-prevu-fond:    #e8f4fd;
+    --couleur-prevu-texte:   #1a6fa8;
+    --couleur-visite-fond:   #e6f7f1;
+    --couleur-visite-texte:  #1a7a50;
 
     /* Polices */
-    --font-display:  'Playfair Display', Georgia, serif;
-    --font-body:     'DM Sans', system-ui, sans-serif;
+    --police-titre: 'Playfair Display', Georgia, serif;
+    --police-texte: 'DM Sans', Arial, sans-serif;
 
     /* Espacements */
-    --space-xs:   0.4rem;
-    --space-sm:   0.75rem;
-    --space-md:   1.25rem;
-    --space-lg:   2rem;
-    --space-xl:   3.5rem;
+    --espace-xs: 0.4rem;
+    --espace-sm: 0.75rem;
+    --espace-md: 1.25rem;
+    --espace-lg: 2rem;
+    --espace-xl: 3rem;
 
-    /* Autres tokens */
-    --radius-sm:    6px;
-    --radius-md:    12px;
-    --radius-lg:    20px;
-    --shadow-card:  0 4px 20px rgba(26, 58, 92, 0.08);
-    --shadow-hover: 0 12px 40px rgba(26, 58, 92, 0.16);
-    --transition:   0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Bords arrondis */
+    --arrondi-sm: 6px;
+    --arrondi-md: 12px;
+    --arrondi-lg: 20px;
 }
 
 /* Reset de base */
-*,
-*::before,
-*::after {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
-/* Images adaptatives — évite le débordement */
 img {
     max-width: 100%;
     display: block;
 }
 
-/* Scrollbar personnalisée */
-::-webkit-scrollbar {
-    width: 6px;
-}
-::-webkit-scrollbar-track {
-    background: var(--color-bg);
-}
-::-webkit-scrollbar-thumb {
-    background: var(--color-secondary);
-    border-radius: 3px;
-}
-
-/* Body — fond général */
 body {
-    font-family: var(--font-body);
-    font-weight: 400;
+    font-family: var(--police-texte);
     font-size: 1rem;
     line-height: 1.6;
-    color: var(--color-text);
-    background-color: var(--color-bg);
-
-    /* Motif subtil de points — ambiance carte géographique */
-    background-image: radial-gradient(
-            circle,
-            rgba(56, 178, 172, 0.08) 1px,
-            transparent 1px
-    );
-    background-size: 28px 28px;
-    -webkit-font-smoothing: antialiased;
+    color: var(--couleur-texte);
+    background-color: var(--couleur-fond);
 }
 
-/* Header — titre centré */
+
+/* HEADER */
 header {
     text-align: center;
-    padding: var(--space-xl) var(--space-md) var(--space-lg);
-    background: linear-gradient(
-            160deg,
-            var(--color-primary)    0%,
-            var(--color-primary-light) 60%,
-            #1e6ea8                 100%
-    );
+    padding: var(--espace-xl) var(--espace-md) var(--espace-lg);
+    background: linear-gradient(135deg, var(--couleur-principale), var(--couleur-secondaire));
     color: #ffffff;
-    position: relative;
-    overflow: hidden;
 }
 
-/* Cercle décoratif abstrait — touche "horizon" */
-header::before {
-    content: "";
-    position: absolute;
-    bottom: -60px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 500px;
-    height: 120px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.06);
-    pointer-events: none;
-}
-
-/* Ligne ondulée décorative en bas du header */
-header::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(
-            90deg,
-            var(--color-secondary),
-            var(--color-accent),
-            var(--color-secondary)
-    );
-}
-
-/* Seul <h1> de la page */
 header h1 {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 5vw, 3.2rem); /* fluide mobile → desktop */
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    line-height: 1.15;
+    font-family: var(--police-titre);
+    font-size: 2.5rem;
     color: #ffffff;
-    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
-    margin-bottom: var(--space-xs);
+    margin-bottom: var(--espace-xs);
 }
 
-/* Sous-titre du header */
 header p {
     font-size: 0.9rem;
     font-weight: 300;
-    letter-spacing: 0.15em;
+    color: rgba(255, 255, 255, 0.75);
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.72);
-    margin-top: var(--space-xs);
 }
 
-/* Main — conteneur centré */
+/* Compteur de destinations */
+.header-compteur {
+    display: inline-flex;
+    gap: var(--espace-md);
+    margin-top: var(--espace-sm);
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: var(--arrondi-lg);
+    padding: 0.4rem 1.2rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+
+/* MAIN */
 main {
     max-width: 1200px;
     margin: 0 auto;
-    padding: var(--space-lg) var(--space-lg) var(--space-xl);
+    padding: var(--espace-lg);
 }
 
-/* Section .controls — barre de recherche */
-.controls {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-sm);
-    align-items: center;
-    margin-bottom: var(--space-lg);
-}
 
-/* Barre de recherche — coins arrondis, icône intégrée */
-#recherche {
-    flex: 1;
-    min-width: 220px;
-    padding: 0.65rem 1rem 0.65rem 2.6rem;
-    font-family: var(--font-body);
-    font-size: 0.95rem;
-    font-weight: 400;
-    color: var(--color-text);
-    background-color: var(--color-bg-card);
-
-    /* Icône loupe SVG en arrière-plan */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7a8d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: 0.8rem center;
-    border: 1.5px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    outline: none;
-    transition:
-            border-color var(--transition),
-            box-shadow var(--transition);
-}
-
-#recherche::placeholder {
-    color: var(--color-text-muted);
-    font-weight: 300;
-}
-
-/* État :focus — interaction clavier et clic */
-#recherche:focus {
-    border-color: var(--color-secondary);
-    box-shadow: 0 0 0 3px rgba(56, 178, 172, 0.18);
-}
-
-/* Boutons génériques — base commune */
-button,
-.btn {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-xs);
-    font-family: var(--font-body);
-    font-size: 0.9rem;
-    font-weight: 500;
-    border: none;
-    border-radius: var(--radius-lg);
-    cursor: pointer;
-    padding: 0.65rem 1.3rem;
-    transition:
-            background-color var(--transition),
-            box-shadow var(--transition),
-            transform var(--transition);
-    white-space: nowrap;
-}
-
-button:focus-visible,
-.btn:focus-visible {
-    outline: 3px solid var(--color-secondary);
-    outline-offset: 2px;
-}
-
-/* Bouton principal — Ajouter une destination */
-.btn-ajouter,
-button.btn-ajouter {
-    background-color: var(--color-primary);
-    color: #ffffff;
-    box-shadow: 0 4px 14px rgba(26, 58, 92, 0.25);
-}
-
-.btn-ajouter:hover {
-    background-color: var(--color-primary-light);
-    box-shadow: 0 6px 20px rgba(26, 58, 92, 0.35);
-    transform: translateY(-2px);
-}
-
-.btn-ajouter:active {
-    transform: translateY(0);
-}
-
-/* Bouton secondaire — Supprimer */
-.btn-supprimer,
-button.btn-supprimer {
-    background-color: transparent;
-    color: #c0392b;
-    border: 1.5px solid #e8b4b0;
-    padding: 0.4rem 0.85rem;
-    font-size: 0.8rem;
-    border-radius: var(--radius-sm);
-}
-
-.btn-supprimer:hover {
-    background-color: #fdf0ef;
-    border-color: #c0392b;
-    transform: translateY(-1px);
-}
-
-/* Boutons de filtre statut */
-.btn-filtre,
-button.btn-filtre {
-    background-color: var(--color-bg-card);
-    color: var(--color-text-muted);
-    border: 1.5px solid var(--color-border);
-    padding: 0.5rem 1rem;
-    font-size: 0.85rem;
-    border-radius: var(--radius-lg);
-}
-
-.btn-filtre:hover {
-    border-color: var(--color-secondary);
-    color: var(--color-secondary);
-    background-color: rgba(56, 178, 172, 0.06);
-}
-
-/* Filtre actif */
-.btn-filtre.actif,
-.btn-filtre[aria-pressed="true"] {
-    background-color: var(--color-secondary);
-    color: #ffffff;
-    border-color: var(--color-secondary);
-}
-
-/* Menu de tri */
-select.tri {
-    font-family: var(--font-body);
-    font-size: 0.875rem;
-    font-weight: 400;
-    color: var(--color-text);
-    background-color: var(--color-bg-card);
-    border: 1.5px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: 0.6rem 2rem 0.6rem 1rem;
-    cursor: pointer;
-    outline: none;
-    appearance: none;
-
-    /* Chevron SVG personnalisé */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7a8d' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: calc(100% - 0.75rem) center;
-    transition: border-color var(--transition);
-}
-
-select.tri:focus {
-    border-color: var(--color-secondary);
-    box-shadow: 0 0 0 3px rgba(56, 178, 172, 0.18);
-}
-
-/* Grille de destinations */
-.voyage-grid {
-    display: grid;
-
-    /* Mobile-first : 1 colonne par défaut */
-    grid-template-columns: 1fr;
-    gap: var(--space-md);
-}
-
-/* Animations — apparition des cartes */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(18px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Carte de destination */
-.voyage-card {
-    background: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    box-shadow: var(--shadow-card);
-    transition:
-            transform var(--transition),
-            box-shadow var(--transition),
-            border-color var(--transition);
-    animation: fadeInUp 0.45s ease both;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Stagger — décalage en cascade jusqu'à 8 cartes */
-.voyage-card:nth-child(1) { animation-delay: 0s;    }
-.voyage-card:nth-child(2) { animation-delay: 0.06s; }
-.voyage-card:nth-child(3) { animation-delay: 0.12s; }
-.voyage-card:nth-child(4) { animation-delay: 0.18s; }
-.voyage-card:nth-child(5) { animation-delay: 0.24s; }
-.voyage-card:nth-child(6) { animation-delay: 0.30s; }
-.voyage-card:nth-child(7) { animation-delay: 0.36s; }
-.voyage-card:nth-child(8) { animation-delay: 0.42s; }
-
-/* :hover — élévation douce */
-.voyage-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-hover);
-    border-color: rgba(56, 178, 172, 0.4);
-}
-
-/* Image de la carte — ratio portrait 3/2 */
-.voyage-card img,
-.voyage-card .card-image {
-    width: 100%;
-    aspect-ratio: 3 / 2;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.voyage-card:hover img,
-.voyage-card:hover .card-image {
-    transform: scale(1.04);
-}
-
-/* Conteneur image (pour gérer overflow: hidden sans affecter la carte entière) */
-.card-image-wrapper {
-    overflow: hidden;
-    position: relative;
-}
-
-/* Badge type de destination */
-.badge-type {
-    position: absolute;
-    top: var(--space-sm);
-    left: var(--space-sm);
-    font-family: var(--font-body);
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    padding: 0.25rem 0.65rem;
-    border-radius: var(--radius-sm);
-    background-color: rgba(26, 58, 92, 0.82);
-    color: #ffffff;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-}
-
-/* Infos de la carte */
-.card-body {
-    padding: var(--space-sm) var(--space-md) var(--space-md);
-    display: flex;
-    flex-direction: column;
-    flex: 1; /* remplit la hauteur restante */
-}
-
-/* Ligne supérieure : nom + badge statut */
-.card-header-row {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: var(--space-xs);
-    margin-bottom: 0.2rem;
-}
-
-/* Nom de la destination — <h2> ou <h3> selon structure */
-.card-body h2,
-.card-body h3 {
-    font-family: var(--font-display);
-    font-size: 1.2rem;
-    font-weight: 700;
-    line-height: 1.25;
-    color: var(--color-text);
-    flex: 1;
-}
-
-/* Pays */
-.card-pays {
-    font-size: 0.8rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-secondary);
-    margin-bottom: var(--space-xs);
-}
-
-/* Description courte */
-.card-description {
-    font-size: 0.875rem;
-    color: var(--color-text-muted);
-    line-height: 1.55;
-    margin-bottom: var(--space-sm);
-    flex: 1;
-}
-
-/* Badges de statut — Prévu / Visité */
-.badge-statut {
-    display: inline-block;
-    font-family: var(--font-body);
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    padding: 0.2rem 0.6rem;
-    border-radius: 999px;
-    white-space: nowrap;
-}
-
-.badge-statut.prevu {
-    background-color: var(--color-prevu-bg);
-    color: var(--color-prevu-text);
-}
-
-.badge-statut.visite {
-    background-color: var(--color-visite-bg);
-    color: var(--color-visite-text);
-}
-
-/* Pied de carte — bouton supprimer */
-.card-footer {
-    display: flex;
-    justify-content: flex-end;
-    padding-top: var(--space-xs);
-    margin-top: auto;
-    border-top: 1px solid var(--color-border);
-}
-
-/*  Message vide — aucun résultat */
-.message-vide {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 4rem var(--space-lg);
-    color: var(--color-text-muted);
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: 1.15rem;
-}
-
-/* Responsive — Tablette ≥ 640px */
-@media (min-width: 640px) {
-    .voyage-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* Responsive — Tablette large ≥ 768px */
-@media (min-width: 768px) {
-    .controls {
-        flex-wrap: nowrap;
-    }
-
-    #recherche {
-        max-width: 380px;
-    }
-}
-
-/* Responsive — Desktop ≥ 1024px */
-@media (min-width: 1024px) {
-    .voyage-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-/* Responsive — Grand écran ≥ 1280px */
-@media (min-width: 1280px) {
-    .voyage-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-
-/* Accessibilité — focus visible pour navigation clavier */
-:focus-visible {
-    outline: 3px solid var(--color-secondary);
-    outline-offset: 3px;
-}
-
-/* Masquer l'outline par défaut si géré manuellement */
-:focus:not(:focus-visible) {
-    outline: none;
-}
-
-/* Formulaire d'ajout */
+/* FORMULAIRE D'AJOUT */
 .formulaire-section {
-    background: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    padding: var(--space-md) var(--space-lg);
-    margin-bottom: var(--space-lg);
-    box-shadow: var(--shadow-card);
+    background: var(--couleur-carte);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: var(--arrondi-md);
+    margin-bottom: var(--espace-lg);
+    box-shadow: 0 4px 16px rgba(26, 58, 92, 0.08);
+}
+
+/* Bouton pour ouvrir/fermer le formulaire */
+.btn-toggle-formulaire {
+    width: 100%;
+    background: var(--couleur-principale);
+    color: #ffffff;
+    border: none;
+    border-radius: var(--arrondi-md);
+    padding: 0.85rem var(--espace-md);
+    font-family: var(--police-texte);
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-toggle-formulaire:hover {
+    background: var(--couleur-secondaire);
+}
+
+.btn-toggle-formulaire.ouvert {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+/* Zone du formulaire (cachée par défaut) */
+.formulaire-contenu {
+    padding: var(--espace-md) var(--espace-lg);
+    border-top: 1px solid var(--couleur-bordure);
+}
+
+.formulaire-contenu[hidden] {
+    display: none;
 }
 
 .formulaire-titre {
-    font-family: var(--font-display);
+    font-family: var(--police-titre);
     font-size: 1.2rem;
-    color: var(--color-primary);
-    margin-bottom: var(--space-md);
+    color: var(--couleur-principale);
+    margin-bottom: var(--espace-md);
 }
 
+/* Grille des champs */
 .formulaire-grille {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-md);
+    gap: var(--espace-sm);
+    margin-bottom: var(--espace-md);
 }
 
-/* Le champ image prend toute la largeur */
 .champ-image {
     grid-column: 1 / -1;
 }
 
+/* Champ individuel */
 .champ {
     display: flex;
     flex-direction: column;
@@ -586,29 +176,29 @@ select.tri:focus {
 .champ label {
     font-size: 0.85rem;
     font-weight: 500;
-    color: var(--color-text);
+    color: var(--couleur-texte);
 }
 
 .champ input,
 .champ select {
-    font-family: var(--font-body);
+    font-family: var(--police-texte);
     font-size: 0.9rem;
-    color: var(--color-text);
-    background: var(--color-bg);
-    border: 1.5px solid var(--color-border);
-    border-radius: var(--radius-sm);
+    color: var(--couleur-texte);
+    background: var(--couleur-fond);
+    border: 1.5px solid var(--couleur-bordure);
+    border-radius: var(--arrondi-sm);
     padding: 0.55rem 0.85rem;
     outline: none;
-    transition: border-color var(--transition), box-shadow var(--transition);
+    transition: border-color 0.2s;
 }
 
 .champ input:focus,
 .champ select:focus {
-    border-color: var(--color-secondary);
-    box-shadow: 0 0 0 3px rgba(56, 178, 172, 0.18);
+    border-color: var(--couleur-accent);
+    box-shadow: 0 0 0 3px rgba(56, 178, 172, 0.15);
 }
 
-/* Champ en erreur */
+/* Champ invalide */
 .champ input.invalide,
 .champ select.invalide {
     border-color: #c0392b;
@@ -620,37 +210,290 @@ select.tri:focus {
     min-height: 1rem;
 }
 
-/* Responsive formulaire — 1 colonne sur mobile */
-@media (max-width: 640px) {
-    .formulaire-grille {
-        grid-template-columns: 1fr;
-    }
-    .champ-image {
-        grid-column: 1;
-    }
+
+/* BARRE DE CONTRÔLES (recherce, filtres, tri)*/
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espace-sm);
+    align-items: center;
+    margin-bottom: var(--espace-lg);
 }
 
-/* Bouton modifier sur les cartes */
-.card-footer {
-    gap: var(--space-xs);
+#recherche {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.65rem 1rem;
+    font-family: var(--police-texte);
+    font-size: 0.95rem;
+    color: var(--couleur-texte);
+    background: var(--couleur-carte);
+    border: 1.5px solid var(--couleur-bordure);
+    border-radius: var(--arrondi-lg);
+    outline: none;
+    transition: border-color 0.2s;
 }
 
-.btn-modifier {
-    background-color: transparent;
-    color: var(--color-primary);
-    border: 1.5px solid var(--color-border);
-    padding: 0.4rem 0.85rem;
-    font-size: 0.8rem;
-    border-radius: var(--radius-sm);
+#recherche::placeholder {
+    color: var(--couleur-texte-discret);
 }
 
-.btn-modifier:hover {
-    background-color: var(--color-accent-light);
-    border-color: var(--color-primary);
+#recherche:focus {
+    border-color: var(--couleur-accent);
+    box-shadow: 0 0 0 3px rgba(56, 178, 172, 0.15);
+}
+
+/* Select tri et filtre type */
+select.tri {
+    font-family: var(--police-texte);
+    font-size: 0.875rem;
+    color: var(--couleur-texte);
+    background: var(--couleur-carte);
+    border: 1.5px solid var(--couleur-bordure);
+    border-radius: var(--arrondi-lg);
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+select.tri:focus {
+    border-color: var(--couleur-accent);
+}
+
+
+/* BOUTONS */
+
+/* Base commune */
+button {
+    font-family: var(--police-texte);
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: none;
+    border-radius: var(--arrondi-lg);
+    cursor: pointer;
+    padding: 0.65rem 1.2rem;
+    transition: background-color 0.2s, transform 0.15s;
+}
+
+button:focus-visible {
+    outline: 3px solid var(--couleur-accent);
+    outline-offset: 2px;
+}
+
+/* Bouton principal (ajouter, enregistrer) */
+.btn-ajouter {
+    background: var(--couleur-principale);
+    color: #ffffff;
+}
+
+.btn-ajouter:hover {
+    background: var(--couleur-secondaire);
     transform: translateY(-1px);
 }
 
-/* Fenêtre modale de modification */
+/* Boutons filtres statut */
+.btn-filtre {
+    background: var(--couleur-carte);
+    color: var(--couleur-texte-discret);
+    border: 1.5px solid var(--couleur-bordure);
+    border-radius: var(--arrondi-lg);
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+}
+
+.btn-filtre:hover {
+    border-color: var(--couleur-accent);
+    color: var(--couleur-accent);
+}
+
+.btn-filtre.actif {
+    background: var(--couleur-accent);
+    color: #ffffff;
+    border-color: var(--couleur-accent);
+}
+
+/* Bouton supprimer (sur les cartes) */
+.btn-supprimer {
+    background: transparent;
+    color: #c0392b;
+    border: 1.5px solid #e8b4b0;
+    border-radius: var(--arrondi-sm);
+    padding: 0.4rem 0.85rem;
+    font-size: 0.8rem;
+}
+
+.btn-supprimer:hover {
+    background: #fdf0ef;
+    border-color: #c0392b;
+}
+
+/* Bouton modifier (sur les cartes) */
+.btn-modifier {
+    background: transparent;
+    color: var(--couleur-principale);
+    border: 1.5px solid var(--couleur-bordure);
+    border-radius: var(--arrondi-sm);
+    padding: 0.4rem 0.85rem;
+    font-size: 0.8rem;
+}
+
+.btn-modifier:hover {
+    background: #e8f4fd;
+    border-color: var(--couleur-principale);
+}
+
+/* Message de confirmation (ajout / suppression) */
+.message-confirmation {
+    background: var(--couleur-visite-fond);
+    color: var(--couleur-visite-texte);
+    border: 1px solid var(--couleur-visite-texte);
+    border-radius: var(--arrondi-sm);
+    padding: 0.75rem 1rem;
+    margin-bottom: var(--espace-md);
+    font-size: 0.9rem;
+}
+
+/* GRILLE DE DESTINATIONS */
+
+/* Mobile : 1 colonne */
+.voyage-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--espace-md);
+}
+
+/* Carte */
+.voyage-card {
+    background: var(--couleur-carte);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: var(--arrondi-md);
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(26, 58, 92, 0.08);
+    transition: transform 0.25s, box-shadow 0.25s;
+    display: flex;
+    flex-direction: column;
+}
+
+.voyage-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(26, 58, 92, 0.15);
+}
+
+/* Image */
+.card-image-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.voyage-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s;
+}
+
+.voyage-card:hover img {
+    transform: scale(1.04);
+}
+
+/* Badge type (affiché sur l'image) */
+.badge-type {
+    position: absolute;
+    top: var(--espace-sm);
+    left: var(--espace-sm);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.25rem 0.65rem;
+    border-radius: var(--arrondi-sm);
+    background: rgba(26, 58, 92, 0.82);
+    color: #ffffff;
+}
+
+/* Corps de la carte */
+.card-body {
+    padding: var(--espace-sm) var(--espace-md) var(--espace-md);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.card-header-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--espace-xs);
+    margin-bottom: 0.25rem;
+}
+
+.card-body h3 {
+    font-family: var(--police-titre);
+    font-size: 1.15rem;
+    color: var(--couleur-texte);
+}
+
+.card-pays {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--couleur-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: var(--espace-xs);
+}
+
+.card-date {
+    font-size: 0.82rem;
+    color: var(--couleur-texte-discret);
+    margin-bottom: var(--espace-sm);
+}
+
+/* Footer de la carte (boutons) */
+.card-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--espace-xs);
+    padding-top: var(--espace-xs);
+    margin-top: auto;
+    border-top: 1px solid var(--couleur-bordure);
+}
+
+/* Badges statut */
+.badge-statut {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+.badge-statut.prevu {
+    background: var(--couleur-prevu-fond);
+    color: var(--couleur-prevu-texte);
+}
+
+.badge-statut.visite {
+    background: var(--couleur-visite-fond);
+    color: var(--couleur-visite-texte);
+}
+
+/* Message aucun résultat */
+.message-vide {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem var(--espace-lg);
+    color: var(--couleur-texte-discret);
+    font-style: italic;
+    font-size: 1.1rem;
+}
+
+
+/* FENETRE MODALE DE MODIFICATION */
 .modale-overlay {
     position: fixed;
     inset: 0;
@@ -659,7 +502,6 @@ select.tri:focus {
     align-items: center;
     justify-content: center;
     z-index: 100;
-    backdrop-filter: blur(3px);
 }
 
 .modale-overlay[hidden] {
@@ -667,32 +509,46 @@ select.tri:focus {
 }
 
 .modale-contenu {
-    background: var(--color-bg-card);
-    border-radius: var(--radius-md);
-    padding: var(--space-lg);
-    width: min(520px, 90vw);
-    box-shadow: var(--shadow-hover);
+    background: var(--couleur-carte);
+    border-radius: var(--arrondi-md);
+    padding: var(--espace-lg);
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 10px 40px rgba(26, 58, 92, 0.2);
 }
 
 .modale-contenu h2 {
-    font-family: var(--font-display);
+    font-family: var(--police-titre);
     font-size: 1.3rem;
-    color: var(--color-primary);
-    margin-bottom: var(--space-md);
+    color: var(--couleur-principale);
+    margin-bottom: var(--espace-md);
 }
 
 .modale-contenu .champ {
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--espace-sm);
 }
 
 .modale-boutons {
     display: flex;
-    gap: var(--space-sm);
+    gap: var(--espace-sm);
     justify-content: flex-end;
-    margin-top: var(--space-md);
+    margin-top: var(--espace-md);
 }
 
-/* Labels cachés visuellement */
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: var(--espace-md);
+    background: linear-gradient(135deg, var(--couleur-principale), var(--couleur-secondaire));
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.85rem;
+}
+
+
+/* UTILITAIRES */
+
+/* Texte accessible uniquement aux lecteurs d'écran */
 .sr-only {
     position: absolute;
     width: 1px;
@@ -702,158 +558,58 @@ select.tri:focus {
     white-space: nowrap;
 }
 
-/* Header dégradé animé */
-@keyframes gradientShift {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+
+/* RESPONSIVE — Tablette : 2 colonnes (≥ 640px) */
+@media (min-width: 640px) {
+    .voyage-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    header h1 {
+        font-size: 3rem;
+    }
 }
 
-header {
-    background: linear-gradient(
-            135deg,
-            var(--color-primary),
-            var(--color-primary-light),
-            #1e6ea8,
-            var(--color-secondary)
-    );
-    background-size: 300% 300%;
-    animation: gradientShift 8s ease infinite;
+
+/* RESPONSIVE — Desktop : 3 colonnes (≥ 1024px) */
+@media (min-width: 1024px) {
+    .voyage-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .controls {
+        flex-wrap: nowrap;
+    }
+
+    #recherche {
+        max-width: 350px;
+    }
+
+    header h1 {
+        font-size: 3.5rem;
+    }
 }
 
-.header-contenu {
-    position: relative;
-    z-index: 1;
+
+/* RESPONSIVE — Grand écran : 4 colonnes (≥ 1280px) */
+@media (min-width: 1280px) {
+    .voyage-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 
-/* Compteur dans le header */
-.header-compteur {
-    display: inline-flex;
-    gap: var(--space-md);
-    margin-top: var(--space-sm);
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: var(--radius-lg);
-    padding: 0.4rem 1.2rem;
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.95);
-    font-weight: 500;
-    letter-spacing: 0.05em;
-}
 
-.header-compteur span {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-}
+/* RESPONSIVE — Formulaire mobile : 1 colonne (≤ 640px) */
+@media (max-width: 640px) {
+    .formulaire-grille {
+        grid-template-columns: 1fr;
+    }
 
-.header-compteur span + span::before {
-    content: "·";
-    margin-right: 0.3rem;
-    opacity: 0.5;
-}
+    .champ-image {
+        grid-column: 1;
+    }
 
-/* Formulaire réductible */
-.btn-toggle-formulaire {
-    width: 100%;
-    background: var(--color-primary);
-    color: #ffffff;
-    border-radius: var(--radius-md);
-    padding: 0.85rem var(--space-md);
-    font-size: 1rem;
-    font-weight: 500;
-    text-align: left;
-    box-shadow: var(--shadow-card);
-    transition: background-color var(--transition), border-radius var(--transition);
-}
-
-.btn-toggle-formulaire:hover {
-    background: var(--color-primary-light);
-}
-
-/* Quand le formulaire est ouvert, le bouton perd ses coins bas */
-.btn-toggle-formulaire.ouvert {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-#icone-toggle {
-    display: inline-block;
-    font-size: 1.2rem;
-    transition: transform var(--transition);
-    margin-right: var(--space-xs);
-}
-
-.btn-toggle-formulaire.ouvert #icone-toggle {
-    transform: rotate(45deg);
-}
-
-.formulaire-contenu {
-    border: 1px solid var(--color-border);
-    border-top: none;
-    border-bottom-left-radius: var(--radius-md);
-    border-bottom-right-radius: var(--radius-md);
-    padding: var(--space-md) var(--space-lg);
-    background: var(--color-bg-card);
-    box-shadow: var(--shadow-card);
-    margin-bottom: var(--space-lg);
-}
-
-.formulaire-contenu[hidden] {
-    display: none;
-}
-
-/* Overlay sur les cartes au survol*/
-.card-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: var(--space-sm) var(--space-md);
-    background: linear-gradient(
-            to top,
-            rgba(26, 58, 92, 0.88) 0%,
-            transparent 100%
-    );
-    opacity: 0;
-    transform: translateY(6px);
-    transition: opacity var(--transition), transform var(--transition);
-}
-
-.voyage-card:hover .card-overlay {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.card-pays-overlay {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: rgba(255, 255, 255, 0.85);
-}
-
-.card-date-overlay {
-    font-size: 0.82rem;
-    color: #ffffff;
-    margin-top: 0.15rem;
-}
-
-footer {
-    text-align: center;
-    padding: var(--space-md);
-    background: linear-gradient(
-            135deg,
-            var(--color-primary),
-            var(--color-primary-light),
-            #1e6ea8,
-            var(--color-secondary)
-    );
-    background-size: 300% 300%;
-    animation: gradientShift 8s ease infinite;
-    color: rgba(255, 255, 255, 0.85);
-    font-size: 0.85rem;
-    font-weight: 300;
-    letter-spacing: 0.08em;
+    main {
+        padding: var(--espace-md);
+    }
 }

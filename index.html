@@ -8,6 +8,7 @@
 </head>
 <body>
 
+<!-- En-tête de la page -->
 <header>
     <div class="header-contenu">
         <h1>Carnet de voyages</h1>
@@ -20,30 +21,32 @@
 
     <!-- Formulaire d'ajout d'une destination -->
     <section class="formulaire-section">
+
         <button type="button" id="btn-toggle-formulaire" class="btn-toggle-formulaire">
             <span id="icone-toggle">+</span> Ajouter une destination
         </button>
 
         <div id="formulaire-contenu" class="formulaire-contenu" hidden>
             <h2 class="formulaire-titre">Nouvelle destination</h2>
-            <form id="formulaire-ajout" class="formulaire" novalidate>
+
+            <form id="formulaire-ajout" class="formulaire">
                 <div class="formulaire-grille">
 
                     <div class="champ">
                         <label for="champ-lieu">Lieu *</label>
-                        <input type="text" id="champ-lieu" placeholder="ex: Tokyo" required>
+                        <input type="text" id="champ-lieu" placeholder="ex: Tokyo">
                         <span class="erreur" id="erreur-lieu"></span>
                     </div>
 
                     <div class="champ">
                         <label for="champ-pays">Pays *</label>
-                        <input type="text" id="champ-pays" placeholder="ex: Japon" required>
+                        <input type="text" id="champ-pays" placeholder="ex: Japon">
                         <span class="erreur" id="erreur-pays"></span>
                     </div>
 
                     <div class="champ">
                         <label for="champ-continent">Continent *</label>
-                        <select id="champ-continent" required>
+                        <select id="champ-continent">
                             <option value="">-- Choisir --</option>
                             <option value="Europe">Europe</option>
                             <option value="Asie">Asie</option>
@@ -57,7 +60,7 @@
 
                     <div class="champ">
                         <label for="champ-type">Type *</label>
-                        <select id="champ-type" required>
+                        <select id="champ-type">
                             <option value="">-- Choisir --</option>
                             <option value="Ville">Ville</option>
                             <option value="Mer">Mer</option>
@@ -69,7 +72,7 @@
 
                     <div class="champ">
                         <label for="champ-statut">Statut *</label>
-                        <select id="champ-statut" required>
+                        <select id="champ-statut">
                             <option value="">-- Choisir --</option>
                             <option value="Prévu">Prévu</option>
                             <option value="Visité">Visité</option>
@@ -80,6 +83,7 @@
                     <div class="champ">
                         <label for="champ-date">Année (optionnel)</label>
                         <input type="number" id="champ-date" placeholder="ex: 2026" min="1900" max="2100">
+                        <span class="erreur" id="erreur-date"></span>
                     </div>
 
                     <div class="champ champ-image">
@@ -88,22 +92,25 @@
                     </div>
 
                 </div>
+
                 <button type="submit" class="btn-ajouter">+ Ajouter la destination</button>
             </form>
         </div>
+
     </section>
 
     <!-- Barre de recherche, filtres et tri -->
     <section class="controls">
-        <label for="recherche" class="sr-only">Rechercher</label>
+
+        <label for="recherche" class="sr-only">Rechercher une destination</label>
         <input type="text" id="recherche" placeholder="Rechercher un lieu, un pays...">
 
         <!-- Filtres par statut -->
-        <button class="btn-filtre actif" data-filtre="Tous">Tous</button>
-        <button class="btn-filtre" data-filtre="Prévu">Prévu</button>
-        <button class="btn-filtre" data-filtre="Visité">Visité</button>
+        <button type="button" class="btn-filtre actif" data-filtre="Tous">Tous</button>
+        <button type="button" class="btn-filtre" data-filtre="Prévu">Prévu</button>
+        <button type="button" class="btn-filtre" data-filtre="Visité">Visité</button>
 
-        <!-- Filtre par type (bonus catégorie) -->
+        <!-- Filtre par type (bonus) -->
         <label for="filtre-type" class="sr-only">Filtrer par type</label>
         <select id="filtre-type" class="tri">
             <option value="">Tous les types</option>
@@ -124,36 +131,40 @@
             <option value="statut">Statut</option>
         </select>
 
-        <!-- Bouton de réinitialisation -->
-        <button id="btn-reinitialiser" class="btn-filtre">✕ Réinitialiser</button>
+        <!-- Réinitialisation -->
+        <button type="button" id="btn-reinitialiser" class="btn-filtre">✕ Réinitialiser</button>
+
     </section>
 
-    <!-- Grille de destinations -->
+
+    <!-- Grille des destinations -->
     <section id="voyage-container" class="voyage-grid"></section>
 
+    <!-- Message de confirmation -->
+    <p id="message-confirmation" class="message-confirmation" hidden></p>
 </main>
+
 
 <!-- Modale de modification (bonus) -->
 <div id="modale" class="modale-overlay" hidden>
     <div class="modale-contenu">
         <h2>Modifier la destination</h2>
-        <form id="formulaire-modif" novalidate>
+
+        <form id="formulaire-modif">
 
             <div class="champ">
                 <label for="modif-lieu">Lieu *</label>
-                <input type="text" id="modif-lieu" required>
-                <span class="erreur" id="erreur-modif-lieu"></span>
+                <input type="text" id="modif-lieu">
             </div>
 
             <div class="champ">
                 <label for="modif-pays">Pays *</label>
-                <input type="text" id="modif-pays" required>
-                <span class="erreur" id="erreur-modif-pays"></span>
+                <input type="text" id="modif-pays">
             </div>
 
             <div class="champ">
                 <label for="modif-continent">Continent *</label>
-                <select id="modif-continent" required>
+                <select id="modif-continent">
                     <option value="Europe">Europe</option>
                     <option value="Asie">Asie</option>
                     <option value="Amérique du Nord">Amérique du Nord</option>
@@ -165,7 +176,7 @@
 
             <div class="champ">
                 <label for="modif-type">Type *</label>
-                <select id="modif-type" required>
+                <select id="modif-type">
                     <option value="Ville">Ville</option>
                     <option value="Mer">Mer</option>
                     <option value="Montagne">Montagne</option>
@@ -175,7 +186,7 @@
 
             <div class="champ">
                 <label for="modif-statut">Statut *</label>
-                <select id="modif-statut" required>
+                <select id="modif-statut">
                     <option value="Prévu">Prévu</option>
                     <option value="Visité">Visité</option>
                 </select>
@@ -195,6 +206,8 @@
     </div>
 </div>
 
+
+<!-- Pied de page -->
 <footer>
     <p>© <span id="annee"></span> Sophie Borgeaud</p>
 </footer>
