@@ -265,30 +265,23 @@ function rafraichir() {
     }
 
     // 4. Tri : je fais une copie avec slice() pour ne pas modifier le tableau original
+    // 4. Tri : je fais une copie avec slice() pour ne pas modifier le tableau original
     if (critèreTri !== "") {
         liste = liste.slice().sort(function(a, b) {
             if (critèreTri === "lieu") {
-                if (a.lieu < b.lieu) return -1;
-                if (a.lieu > b.lieu) return 1;
-                return 0;
+                return a.lieu.localeCompare(b.lieu, "fr");
             }
             if (critèreTri === "pays") {
-                if (a.pays < b.pays) return -1;
-                if (a.pays > b.pays) return 1;
-                return 0;
+                return a.pays.localeCompare(b.pays, "fr");
             }
             if (critèreTri === "continent") {
-                if (a.continent < b.continent) return -1;
-                if (a.continent > b.continent) return 1;
-                return 0;
+                return a.continent.localeCompare(b.continent, "fr");
             }
             if (critèreTri === "date") {
                 return a.date - b.date;
             }
             if (critèreTri === "statut") {
-                if (a.statut < b.statut) return -1;
-                if (a.statut > b.statut) return 1;
-                return 0;
+                return a.statut.localeCompare(b.statut, "fr");
             }
             return 0;
         });
@@ -401,6 +394,11 @@ document.querySelector("#formulaire-ajout").addEventListener("submit", function(
     }, 3000);
 
     rafraichir();
+
+    // On fait défiler jusqu'à la dernière carte ajoutée
+    const toutesLesCartes = document.querySelectorAll(".voyage-card");
+    const derniereCard = toutesLesCartes[toutesLesCartes.length - 1];
+    derniereCard.scrollIntoView({ behavior: "smooth", block: "center" });
 });
 
 
