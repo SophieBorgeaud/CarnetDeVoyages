@@ -147,7 +147,7 @@ let idEnCoursDeModif = null;
 let filtreStatutActif = "Tous";
 
 
-// FONCTIONS D'AFFICHAGE
+// Fonctions d'affichage
 
 // Crée le HTML d'une carte à partir d'un objet destination
 function creerCarteHTML(destination) {
@@ -292,7 +292,7 @@ function rafraichir() {
 }
 
 
-// FORMULAIRE D'AJOUT
+// Formulaire d'ajout
 
 // Ouvre ou ferme le formulaire d'ajout
 document.querySelector("#btn-toggle-formulaire").addEventListener("click", function() {
@@ -402,7 +402,7 @@ document.querySelector("#formulaire-ajout").addEventListener("submit", function(
 });
 
 
-// SUPPRESSION ET MODIFICATION
+// Suppression et modification
 
 // J'écoute les clics sur le conteneur plutôt que sur chaque bouton,
 // parce que les boutons sont créés dynamiquement (ils n'existent pas au chargement)
@@ -466,6 +466,7 @@ document.querySelector("#voyage-container").addEventListener("click", function(e
             document.querySelector("#modif-type").value = destinationAModifier.type;
             document.querySelector("#modif-statut").value = destinationAModifier.statut;
             document.querySelector("#modif-date").value = destinationAModifier.date;
+            document.querySelector("#modif-image").value = destinationAModifier.image;
 
             // J'affiche la modale
             document.querySelector("#modale").hidden = false;
@@ -474,7 +475,7 @@ document.querySelector("#voyage-container").addEventListener("click", function(e
 });
 
 
-// MODALE DE MODIFICATION
+// Modale de modification
 
 // Sauvegarde les modifications
 document.querySelector("#formulaire-modif").addEventListener("submit", function(event) {
@@ -507,6 +508,8 @@ document.querySelector("#formulaire-modif").addEventListener("submit", function(
         destinationAModifier.type = document.querySelector("#modif-type").value;
         destinationAModifier.statut = document.querySelector("#modif-statut").value;
         destinationAModifier.date = document.querySelector("#modif-date").value;
+        document.querySelector("#modif-image").value = destinationAModifier.image;
+        destinationAModifier.image = document.querySelector("#modif-image").value || "images/defaut.jpg";
     }
 
     // On ferme la modale et on réaffiche
@@ -523,7 +526,7 @@ document.querySelector("#btn-fermer-modale").addEventListener("click", function(
 });
 
 
-// FILTRES, RECHERCHE ET TRI
+// Filtres, recherche et tri
 
 // Recherche en temps réel
 document.querySelector("#recherche").addEventListener("input", function() {
@@ -576,7 +579,7 @@ document.querySelector("#btn-reinitialiser").addEventListener("click", function(
     rafraichir();
 });
 
-// INITIALISATION AU CHARGEMENT DE LA PAGE
+// Initialisation au chargement de la page
 
 // Affichage initial
 rafraichir();

@@ -1,7 +1,7 @@
 /* Import police Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500;600&display=swap');
 
-/* Variables CSS — couleurs, polices, espacements */
+/* Variables CSS : couleurs, polices, espacements */
 :root {
     /* Couleurs */
     --couleur-principale:    #1a3a5c;
@@ -14,7 +14,7 @@
     --couleur-texte-discret: #6b7a8d;
     --couleur-bordure:       #dde3ec;
 
-    /* Couleurs badges statut */
+    /* Couleurs des badges statut */
     --couleur-prevu-fond:    #e8f4fd;
     --couleur-prevu-texte:   #1a6fa8;
     --couleur-visite-fond:   #e6f7f1;
@@ -58,7 +58,7 @@ body {
 }
 
 
-/* HEADER */
+/* Header */
 header {
     text-align: center;
     padding: var(--espace-xl) var(--espace-md) var(--espace-lg);
@@ -95,7 +95,7 @@ header p {
 }
 
 
-/* MAIN */
+/* Partie main */
 main {
     max-width: 1200px;
     margin: 0 auto;
@@ -103,7 +103,7 @@ main {
 }
 
 
-/* FORMULAIRE D'AJOUT */
+/* Formulaire d'ajout de destination */
 .formulaire-section {
     background: var(--couleur-carte);
     border: 1px solid var(--couleur-bordure);
@@ -112,7 +112,7 @@ main {
     box-shadow: 0 4px 16px rgba(26, 58, 92, 0.08);
 }
 
-/* Bouton pour ouvrir/fermer le formulaire */
+/* Bouton pour ouvrir/refermer le formulaire */
 .btn-toggle-formulaire {
     width: 100%;
     background: var(--couleur-principale);
@@ -137,7 +137,7 @@ main {
     border-bottom-right-radius: 0;
 }
 
-/* Zone du formulaire (cachée par défaut) */
+/* Zone du formulaire */
 .formulaire-contenu {
     padding: var(--espace-md) var(--espace-lg);
     border-top: 1px solid var(--couleur-bordure);
@@ -211,7 +211,7 @@ main {
 }
 
 
-/* BARRE DE CONTRÔLES (recherce, filtres, tri)*/
+/* Barre de contrôles (recherche, filtres, tri)*/
 .controls {
     display: flex;
     flex-wrap: wrap;
@@ -262,9 +262,9 @@ select.tri:focus {
 }
 
 
-/* BOUTONS */
+/* Boutons */
 
-/* Base commune */
+/* Base commune pour tous */
 button {
     font-family: var(--police-texte);
     font-size: 0.9rem;
@@ -313,7 +313,7 @@ button:focus-visible {
     border-color: var(--couleur-accent);
 }
 
-/* Bouton supprimer (sur les cartes) */
+/* Bouton supprimer (sur chaque carte) */
 .btn-supprimer {
     background: transparent;
     color: #c0392b;
@@ -328,7 +328,7 @@ button:focus-visible {
     border-color: #c0392b;
 }
 
-/* Bouton modifier (sur les cartes) */
+/* Bouton modifier (sur chaque carte) */
 .btn-modifier {
     background: transparent;
     color: var(--couleur-principale);
@@ -354,7 +354,7 @@ button:focus-visible {
     font-size: 0.9rem;
 }
 
-/* GRILLE DE DESTINATIONS */
+/* Grille de destinations */
 
 /* Mobile : 1 colonne */
 .voyage-grid {
@@ -450,7 +450,7 @@ button:focus-visible {
     margin-bottom: var(--espace-sm);
 }
 
-/* Footer de la carte (boutons) */
+/* Footer de la carte (boutons modifier et supprimer) */
 .card-footer {
     display: flex;
     justify-content: flex-end;
@@ -493,7 +493,7 @@ button:focus-visible {
 }
 
 
-/* FENETRE MODALE DE MODIFICATION */
+/* Fenêtre modale de modification */
 .modale-overlay {
     position: fixed;
     inset: 0;
@@ -536,7 +536,7 @@ button:focus-visible {
 }
 
 
-/* FOOTER */
+/* Footer */
 footer {
     text-align: center;
     padding: var(--espace-md);
@@ -546,7 +546,7 @@ footer {
 }
 
 
-/* UTILITAIRES */
+/* Utilitaires */
 
 /* Texte accessible uniquement aux lecteurs d'écran */
 .sr-only {
@@ -559,7 +559,7 @@ footer {
 }
 
 
-/* RESPONSIVE — Tablette : 2 colonnes (≥ 640px) */
+/* Responsive tablette : 2 colonnes (≥ 640px) */
 @media (min-width: 640px) {
     .voyage-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -571,7 +571,7 @@ footer {
 }
 
 
-/* RESPONSIVE — Desktop : 3 colonnes (≥ 1024px) */
+/* Responsive desktop : 3 colonnes (≥ 1024px) */
 @media (min-width: 1024px) {
     .voyage-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -591,7 +591,7 @@ footer {
 }
 
 
-/* RESPONSIVE — Grand écran : 4 colonnes (≥ 1280px) */
+/* Responsive grand écran : 4 colonnes (≥ 1280px) */
 @media (min-width: 1280px) {
     .voyage-grid {
         grid-template-columns: repeat(4, 1fr);
@@ -599,7 +599,7 @@ footer {
 }
 
 
-/* RESPONSIVE — Formulaire mobile : 1 colonne (≤ 640px) */
+/* Responsive formulaire mobile : 1 colonne (≤ 640px) */
 @media (max-width: 640px) {
     .formulaire-grille {
         grid-template-columns: 1fr;

@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<!-- En-tête de la page -->
+<!-- En-tête -->
 <header>
     <div class="header-contenu">
         <h1>Carnet de voyages</h1>
@@ -99,7 +99,7 @@
 
     </section>
 
-    <!-- Barre de recherche, filtres et tri -->
+    <!-- Barre de recherche, filtres et tris -->
     <section class="controls">
 
         <label for="recherche" class="sr-only">Rechercher une destination</label>
@@ -110,7 +110,7 @@
         <button type="button" class="btn-filtre" data-filtre="Prévu">Prévu</button>
         <button type="button" class="btn-filtre" data-filtre="Visité">Visité</button>
 
-        <!-- Filtre par type (bonus) -->
+        <!-- Filtre par type -->
         <label for="filtre-type" class="sr-only">Filtrer par type</label>
         <select id="filtre-type" class="tri">
             <option value="">Tous les types</option>
@@ -136,7 +136,6 @@
 
     </section>
 
-
     <!-- Grille des destinations -->
     <section id="voyage-container" class="voyage-grid"></section>
 
@@ -144,8 +143,7 @@
     <p id="message-confirmation" class="message-confirmation" hidden></p>
 </main>
 
-
-<!-- Modale de modification (bonus) -->
+<!-- Modale de modification -->
 <div id="modale" class="modale-overlay" hidden>
     <div class="modale-contenu">
         <h2>Modifier la destination</h2>
@@ -197,6 +195,11 @@
                 <input type="number" id="modif-date" min="1900" max="2100">
             </div>
 
+            <div class="champ">
+                <label for="modif-image">Image (optionnel)</label>
+                <input type="url" id="modif-image" placeholder="ex: https://unsplash.com/photo.jpg">
+            </div>
+
             <div class="modale-boutons">
                 <button type="submit" class="btn-ajouter">Enregistrer</button>
                 <button type="button" id="btn-fermer-modale" class="btn-filtre">Annuler</button>
@@ -205,7 +208,6 @@
         </form>
     </div>
 </div>
-
 
 <!-- Pied de page -->
 <footer>
