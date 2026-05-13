@@ -192,7 +192,6 @@ function creerCarteHTML(destination) {
     return html;
 }
 
-
 // Affiche la liste des destinations dans la grille
 function afficherDestinations(liste) {
     const grille = document.querySelector("#voyage-container");
@@ -203,12 +202,15 @@ function afficherDestinations(liste) {
         return;
     }
 
-    // On vide la grille et on la remplit avec les nouvelles cartes
-    grille.innerHTML = "";
+    // On construit tout le HTML d'abord dans une variable
+    let html = "";
 
     for (const destination of liste) {
-        grille.innerHTML += creerCarteHTML(destination);
+        html += creerCarteHTML(destination);
     }
+
+    // Une seule écriture dans le DOM à la fin
+    grille.innerHTML = html;
 }
 
 
@@ -237,7 +239,7 @@ function rafraichir() {
     // Je lis les valeurs des contrôles
     const recherche = document.querySelector("#recherche").value.toLowerCase();
     const filtreType = document.querySelector("#filtre-type").value;
-    const critèreTri = document.querySelector("#tri").value;
+    const critereTri = document.querySelector("#tri").value;
 
     // Je pars de tout le tableau
     let liste = destinations;
@@ -265,22 +267,21 @@ function rafraichir() {
     }
 
     // 4. Tri : je fais une copie avec slice() pour ne pas modifier le tableau original
-    // 4. Tri : je fais une copie avec slice() pour ne pas modifier le tableau original
-    if (critèreTri !== "") {
+    if (critereTri !== "") {
         liste = liste.slice().sort(function(a, b) {
-            if (critèreTri === "lieu") {
+            if (critereTri === "lieu") {
                 return a.lieu.localeCompare(b.lieu, "fr");
             }
-            if (critèreTri === "pays") {
+            if (critereTri === "pays") {
                 return a.pays.localeCompare(b.pays, "fr");
             }
-            if (critèreTri === "continent") {
+            if (critereTri === "continent") {
                 return a.continent.localeCompare(b.continent, "fr");
             }
-            if (critèreTri === "date") {
+            if (critereTri === "date") {
                 return a.date - b.date;
             }
-            if (critèreTri === "statut") {
+            if (critereTri === "statut") {
                 return a.statut.localeCompare(b.statut, "fr");
             }
             return 0;
@@ -508,7 +509,6 @@ document.querySelector("#formulaire-modif").addEventListener("submit", function(
         destinationAModifier.type = document.querySelector("#modif-type").value;
         destinationAModifier.statut = document.querySelector("#modif-statut").value;
         destinationAModifier.date = document.querySelector("#modif-date").value;
-        document.querySelector("#modif-image").value = destinationAModifier.image;
         destinationAModifier.image = document.querySelector("#modif-image").value || "images/defaut.jpg";
     }
 
@@ -585,4 +585,4 @@ document.querySelector("#btn-reinitialiser").addEventListener("click", function(
 rafraichir();
 
 // Année dans le footer
-document.querySelector("#annee").textContent = new Date().getFullYear();
+document.querySelector("#annee").textContent = String(new Date().getFullYear());

@@ -50,7 +50,7 @@ img {
 }
 
 body {
-    font-family: var(--police-texte);
+    font-family: var(--police-texte), Arial, sans-serif;
     font-size: 1rem;
     line-height: 1.6;
     color: var(--couleur-texte);
@@ -67,7 +67,7 @@ header {
 }
 
 header h1 {
-    font-family: var(--police-titre);
+    font-family: var(--police-titre), Georgia, serif;
     font-size: 2.5rem;
     color: #ffffff;
     margin-bottom: var(--espace-xs);
@@ -120,7 +120,7 @@ main {
     border: none;
     border-radius: var(--arrondi-md);
     padding: 0.85rem var(--espace-md);
-    font-family: var(--police-texte);
+    font-family: var(--police-texte), Arial, sans-serif;
     font-size: 1rem;
     font-weight: 500;
     text-align: left;
@@ -148,7 +148,7 @@ main {
 }
 
 .formulaire-titre {
-    font-family: var(--police-titre);
+    font-family: var(--police-titre), Georgia, serif;
     font-size: 1.2rem;
     color: var(--couleur-principale);
     margin-bottom: var(--espace-md);
@@ -181,11 +181,11 @@ main {
 
 .champ input,
 .champ select {
-    font-family: var(--police-texte);
+    font-family: var(--police-texte), Arial, sans-serif;
     font-size: 0.9rem;
     color: var(--couleur-texte);
     background: var(--couleur-fond);
-    border: 1.5px solid var(--couleur-bordure);
+    border: 2px solid var(--couleur-bordure);
     border-radius: var(--arrondi-sm);
     padding: 0.55rem 0.85rem;
     outline: none;
@@ -224,11 +224,11 @@ main {
     flex: 1;
     min-width: 200px;
     padding: 0.65rem 1rem;
-    font-family: var(--police-texte);
+    font-family: var(--police-texte), Arial, sans-serif;
     font-size: 0.95rem;
     color: var(--couleur-texte);
     background: var(--couleur-carte);
-    border: 1.5px solid var(--couleur-bordure);
+    border: 2px solid var(--couleur-bordure);
     border-radius: var(--arrondi-lg);
     outline: none;
     transition: border-color 0.2s;
@@ -245,11 +245,11 @@ main {
 
 /* Select tri et filtre type */
 select.tri {
-    font-family: var(--police-texte);
+    font-family: var(--police-texte), Arial, sans-serif;
     font-size: 0.875rem;
     color: var(--couleur-texte);
     background: var(--couleur-carte);
-    border: 1.5px solid var(--couleur-bordure);
+    border: 2px solid var(--couleur-bordure);
     border-radius: var(--arrondi-lg);
     padding: 0.6rem 1rem;
     cursor: pointer;
@@ -266,7 +266,7 @@ select.tri:focus {
 
 /* Base commune pour tous */
 button {
-    font-family: var(--police-texte);
+    font-family: var(--police-texte), Arial, sans-serif;
     font-size: 0.9rem;
     font-weight: 500;
     border: none;
@@ -296,7 +296,7 @@ button:focus-visible {
 .btn-filtre {
     background: var(--couleur-carte);
     color: var(--couleur-texte-discret);
-    border: 1.5px solid var(--couleur-bordure);
+    border: 2px solid var(--couleur-bordure);
     border-radius: var(--arrondi-lg);
     padding: 0.5rem 1rem;
     font-size: 0.85rem;
@@ -317,7 +317,7 @@ button:focus-visible {
 .btn-supprimer {
     background: transparent;
     color: #c0392b;
-    border: 1.5px solid #e8b4b0;
+    border: 2px solid #e8b4b0;
     border-radius: var(--arrondi-sm);
     padding: 0.4rem 0.85rem;
     font-size: 0.8rem;
@@ -332,7 +332,7 @@ button:focus-visible {
 .btn-modifier {
     background: transparent;
     color: var(--couleur-principale);
-    border: 1.5px solid var(--couleur-bordure);
+    border: 2px solid var(--couleur-bordure);
     border-radius: var(--arrondi-sm);
     padding: 0.4rem 0.85rem;
     font-size: 0.8rem;
@@ -430,7 +430,7 @@ button:focus-visible {
 }
 
 .card-body h3 {
-    font-family: var(--police-titre);
+    font-family: var(--police-titre), Georgia, serif;
     font-size: 1.15rem;
     color: var(--couleur-texte);
 }
@@ -518,7 +518,7 @@ button:focus-visible {
 }
 
 .modale-contenu h2 {
-    font-family: var(--police-titre);
+    font-family: var(--police-titre), Georgia, serif;
     font-size: 1.3rem;
     color: var(--couleur-principale);
     margin-bottom: var(--espace-md);
