@@ -34,19 +34,19 @@
 
                     <div class="champ">
                         <label for="champ-lieu">Lieu *</label>
-                        <input type="text" id="champ-lieu" placeholder="ex: Tokyo">
+                        <input type="text" id="champ-lieu" placeholder="ex: Tokyo" required>
                         <span class="erreur" id="erreur-lieu"></span>
                     </div>
 
                     <div class="champ">
                         <label for="champ-pays">Pays *</label>
-                        <input type="text" id="champ-pays" placeholder="ex: Japon">
+                        <input type="text" id="champ-pays" placeholder="ex: Japon" required>
                         <span class="erreur" id="erreur-pays"></span>
                     </div>
 
                     <div class="champ">
                         <label for="champ-continent">Continent *</label>
-                        <select id="champ-continent">
+                        <select id="champ-continent" required>
                             <option value="">-- Choisir --</option>
                             <option value="Europe">Europe</option>
                             <option value="Asie">Asie</option>
@@ -60,7 +60,7 @@
 
                     <div class="champ">
                         <label for="champ-type">Type *</label>
-                        <select id="champ-type">
+                        <select id="champ-type" required>
                             <option value="">-- Choisir --</option>
                             <option value="Ville">Ville</option>
                             <option value="Mer">Mer</option>
@@ -72,7 +72,7 @@
 
                     <div class="champ">
                         <label for="champ-statut">Statut *</label>
-                        <select id="champ-statut">
+                        <select id="champ-statut" required>
                             <option value="">-- Choisir --</option>
                             <option value="Prévu">Prévu</option>
                             <option value="Visité">Visité</option>
@@ -88,7 +88,7 @@
 
                     <div class="champ champ-image">
                         <label for="champ-image">Image (optionnel)</label>
-                        <input type="url" id="champ-image" placeholder="ex: https://upload.wikimedia.org/...">
+                        <input type="url" id="champ-image" placeholder="ex: https://...">
                     </div>
 
                 </div>
@@ -100,7 +100,7 @@
     </section>
 
     <!-- Barre de recherche, filtres et tris -->
-    <section class="controls">
+    <section class="controls" aria-label="Recherche, filtres et tri">
 
         <label for="recherche" class="sr-only">Rechercher une destination</label>
         <input type="text" id="recherche" placeholder="Rechercher un lieu, un pays...">
@@ -136,33 +136,40 @@
 
     </section>
 
-    <!-- Grille des destinations -->
-    <section id="voyage-container" class="voyage-grid"></section>
-
     <!-- Message de confirmation -->
     <p id="message-confirmation" class="message-confirmation" hidden></p>
+
+    <!-- Grille des destinations -->
+    <section id="voyage-container" class="voyage-grid" aria-label="Liste des destinations"></section>
+
 </main>
 
 <!-- Modale de modification -->
-<div id="modale" class="modale-overlay" hidden>
+<div id="modale"
+     class="modale-overlay"
+     hidden
+     role="dialog"
+     aria-modal="true"
+     aria-labelledby="titre-modale">
+
     <div class="modale-contenu">
-        <h2>Modifier la destination</h2>
+        <h2 id="titre-modale">Modifier la destination</h2>
 
         <form id="formulaire-modif">
 
             <div class="champ">
                 <label for="modif-lieu">Lieu *</label>
-                <input type="text" id="modif-lieu">
+                <input type="text" id="modif-lieu" required>
             </div>
 
             <div class="champ">
                 <label for="modif-pays">Pays *</label>
-                <input type="text" id="modif-pays">
+                <input type="text" id="modif-pays" required>
             </div>
 
             <div class="champ">
                 <label for="modif-continent">Continent *</label>
-                <select id="modif-continent">
+                <select id="modif-continent" required>
                     <option value="Europe">Europe</option>
                     <option value="Asie">Asie</option>
                     <option value="Amérique du Nord">Amérique du Nord</option>
@@ -174,7 +181,7 @@
 
             <div class="champ">
                 <label for="modif-type">Type *</label>
-                <select id="modif-type">
+                <select id="modif-type" required>
                     <option value="Ville">Ville</option>
                     <option value="Mer">Mer</option>
                     <option value="Montagne">Montagne</option>
@@ -184,7 +191,7 @@
 
             <div class="champ">
                 <label for="modif-statut">Statut *</label>
-                <select id="modif-statut">
+                <select id="modif-statut" required>
                     <option value="Prévu">Prévu</option>
                     <option value="Visité">Visité</option>
                 </select>

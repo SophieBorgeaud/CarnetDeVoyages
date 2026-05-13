@@ -70,7 +70,7 @@ const destinations = [
         continent: "Europe",
         type: "Nature",
         statut: "Visité",
-        date: "2027",
+        date: "2022",
         image: "images/highlands_ecosse.jpg"
     },
     {
@@ -149,47 +149,64 @@ let filtreStatutActif = "Tous";
 
 // Fonctions d'affichage
 
-// Crée le HTML d'une carte à partir d'un objet destination
+// Je construis le HTML de la carte avec un template litéral
 function creerCarteHTML(destination) {
+
     // Classe CSS du badge selon le statut
     let classeStatut = "prevu";
+
     if (destination.statut === "Visité") {
         classeStatut = "visite";
     }
 
     // Texte de la date selon le statut
     let texteDate = "";
+
     if (destination.statut === "Visité" && destination.date !== "") {
         texteDate = "Visité en " + destination.date;
     } else if (destination.statut === "Prévu" && destination.date !== "") {
         texteDate = "Prévu pour " + destination.date;
     }
 
-    // Je construis le HTML de la carte avec un template litéral
-    let html = '<article class="voyage-card">';
-    html += '<div class="card-image-wrapper">';
-    html += '<img src="' + destination.image + '" alt="Photo de ' + destination.lieu + '">';
-    html += '<span class="badge-type">' + destination.type + '</span>';
-    html += '</div>';
-    html += '<div class="card-body">';
-    html += '<div class="card-header-row">';
-    html += '<h3>' + destination.lieu + '</h3>';
-    html += '<span class="badge-statut ' + classeStatut + '">' + destination.statut + '</span>';
-    html += '</div>';
-    html += '<p class="card-pays">' + destination.pays + ' — ' + destination.continent + '</p>';
+    // Retour du HTML avec template literal
+    return `
+        <article class="voyage-card">
 
-    if (texteDate !== "") {
-        html += '<p class="card-date">' + texteDate + '</p>';
-    }
+            <div class="card-image-wrapper">
+                <img src="${destination.image}" alt="Photo de ${destination.lieu}">
+                <span class="badge-type">${destination.type}</span>
+            </div>
 
-    html += '<div class="card-footer">';
-    html += '<button class="btn-modifier" data-id="' + destination.id + '">✏️ Modifier</button>';
-    html += '<button class="btn-supprimer" data-id="' + destination.id + '">🗑 Supprimer</button>';
-    html += '</div>';
-    html += '</div>';
-    html += '</article>';
+            <div class="card-body">
 
-    return html;
+                <div class="card-header-row">
+                    <h3>${destination.lieu}</h3>
+
+                    <span class="badge-statut ${classeStatut}">
+                        ${destination.statut}
+                    </span>
+                </div>
+
+                <p class="card-pays">
+                    ${destination.pays} — ${destination.continent}
+                </p>
+
+                ${texteDate !== ""? `<p class="card-date">${texteDate}</p>`: ""}
+
+                <div class="card-footer">
+                    <button class="btn-modifier" data-id="${destination.id}">
+                        ✏️ Modifier
+                    </button>
+
+                    <button class="btn-supprimer" data-id="${destination.id}">
+                        🗑 Supprimer
+                    </button>
+                </div>
+
+            </div>
+
+        </article>
+    `;
 }
 
 // Affiche la liste des destinations dans la grille
@@ -359,7 +376,7 @@ document.querySelector("#formulaire-ajout").addEventListener("submit", function(
         return;
     }
 
-    // Si l'année est valide, on efface l'éventuell message d'erreur
+    // Si l'année est valide, on efface l'éventuel message d'erreur
     document.querySelector("#erreur-date").textContent = "";
 
     // On crée un nouvel objet avec les valeurs saisies
@@ -399,7 +416,12 @@ document.querySelector("#formulaire-ajout").addEventListener("submit", function(
     // On fait défiler jusqu'à la dernière carte ajoutée
     const toutesLesCartes = document.querySelectorAll(".voyage-card");
     const derniereCard = toutesLesCartes[toutesLesCartes.length - 1];
-    derniereCard.scrollIntoView({ behavior: "smooth", block: "center" });
+    if (derniereCard) {
+        derniereCard.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+}
 });
 
 

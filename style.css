@@ -7,7 +7,6 @@
     --couleur-principale:    #1a3a5c;
     --couleur-secondaire:    #2a5298;
     --couleur-accent:        #38b2ac;
-    --couleur-corail:        #e8956d;
     --couleur-fond:          #f5f7fa;
     --couleur-carte:         #ffffff;
     --couleur-texte:         #1e2a38;
@@ -84,6 +83,8 @@ header p {
 /* Compteur de destinations */
 .header-compteur {
     display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: var(--espace-md);
     margin-top: var(--espace-sm);
     background: rgba(255, 255, 255, 0.15);
@@ -513,6 +514,8 @@ button:focus-visible {
     border-radius: var(--arrondi-md);
     padding: var(--espace-lg);
     width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
     max-width: 500px;
     box-shadow: 0 10px 40px rgba(26, 58, 92, 0.2);
 }
@@ -553,9 +556,12 @@ footer {
     position: absolute;
     width: 1px;
     height: 1px;
+    padding: 0;
+    margin: -1px;
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
+    border: 0;
 }
 
 
