@@ -12,7 +12,7 @@
 <header>
     <div class="header-contenu">
         <h1>Carnet de voyages</h1>
-        <p>Mon gestionnaire de destinations en JavaScript</p>
+        <p>Mon gestionnaire de destinations</p>
         <div id="compteur" class="header-compteur"></div>
     </div>
 </header>
@@ -88,7 +88,7 @@
 
                     <div class="champ champ-image">
                         <label for="champ-image">Image (optionnel)</label>
-                        <input type="url" id="champ-image" placeholder="ex: https://...">
+                        <input type="text" id="champ-image" placeholder="URL d'une image ou laisser vide pour image par défaut">
                     </div>
 
                 </div>
@@ -103,7 +103,7 @@
     <section class="controls" aria-label="Recherche, filtres et tri">
 
         <label for="recherche" class="sr-only">Rechercher une destination</label>
-        <input type="text" id="recherche" placeholder="Rechercher un lieu, un pays...">
+        <input type="text" id="recherche" placeholder="Rechercher un lieu, un pays, un continent...">
 
         <!-- Filtres par statut -->
         <button type="button" class="btn-filtre actif" data-filtre="Tous">Tous</button>
@@ -204,7 +204,7 @@
 
             <div class="champ">
                 <label for="modif-image">Image (optionnel)</label>
-                <input type="url" id="modif-image" placeholder="ex: https://unsplash.com/photo.jpg">
+                <input type="text" id="modif-image" placeholder="URL d'une image ou laisser vide pour image par défaut">
             </div>
 
             <div class="modale-boutons">

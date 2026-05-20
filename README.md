@@ -3,11 +3,7 @@ Projet JavaScript - Cours 122 (ESIG)
 
 ## Description
 
-J'ai créé une application web pour gérer mes destinations de voyage. J'ai choisi
-ce thème car les voyages me passionnent et je voulais un endroit pour
-noter mes destinations visitées et celles que je rêve de faire un jour.
-Le site permet de visualiser toutes les destinations sous forme de cartes,
-de les filtrer, les trier, d'en ajouter de nouvelles et de les supprimer.
+J'ai créé une application web pour gérer mes destinations de voyage. J'ai choisi ce thème car je voulais un endroit pour noter mes destinations visitées et celles que je rêve de faire un jour. Le site permet de visualiser toutes les destinations sous forme de cartes, de les filtrer, les trier, d'en ajouter de nouvelles et de les supprimer.
 
 ## Lien GitHub Pages
 
@@ -17,7 +13,7 @@ https://sophieborgeaud.github.io/CarnetDeVoyages/
 
 - Affichage dynamique de la liste (cartes avec image, lieu, pays, statut visité/prévu, date prévue)
 - Tri par lieu, pays, continent, date et statut
-- Recherche en temps réel par lieu ou pays
+- Recherche en temps réel par lieu, pays ou continent
 - Filtrage par statut (Tous / Prévu / Visité) et par type (Ville, Mer, Montagne, Nature)
 - Ajout via formulaire avec validation des champs obligatoires
 - Suppression avec confirmation
@@ -52,8 +48,12 @@ J'ai utilisé ces outils comme une assistance technique et d'apprentissage duran
 
 ### Ce que j'ai appris vs ce que l'IA a généré
 
-L’IA a été utilisée principalement pour proposer des structures de code, expliquer certaines syntaxes JavaScript et suggérer des améliorations visuelles ou organisationnelles dans mon code.
+**HTML et CSS** 
+- J'ai utilisé l'IA pour générer environ 90% du code de base. Le semestre passé j'ai appris ces langages dans le module 113, donc je comprends bien ce que je manipule. J'ai fait plusieurs demandes et ajustements pour obtenir une structure qui correspondait à ma vision du projet, puis j'ai modifié et personnalisé le code pour l'adapter à mes besoins.
 
-Le projet a ensuite été adapté et simplifié afin de correspondre aux notions vues en cours et à ma compréhension actuelle du JavaScript.
+**JavaScript** 
+- Pour les fonctionnalités vues en cours (affichage, recherche, tri, filtres, ajout, suppression), je me suis appuyée sur ce qu'on a appris en classe et sur les exercices Nuxy, avec l'aide de l'IA pour structurer et expliquer le code.
 
-J'ai appris à manipuler le DOM, à créer des éléments dynamiquement, à gérer les événements et à structurer mon code de manière plus claire. J'ai également amélioré mes compétences en HTML et CSS depuis le semestre passé pour rendre le site plus attrayant et fonctionnel.
+- Pour des fonctionnalités plus avancées que j'ai voulu ajouter (modification, validations supplémentaires, messages de feedback), j'ai été aidée par l'IA, en prenant soin de comprendre ce qu'elle me proposait avant de l'intégrer.
+
+J'ai pris le temps de comprendre le code généré pour pouvoir l'adapter et l'expliquer.

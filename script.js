@@ -141,11 +141,9 @@ let prochainId = 14;
 // Id de la destination qu'on est en train de modifier (modale)
 let idEnCoursDeModif = null;
 
-
 // --- Filtre actif (statut) ---
 // Je garde en mémoire quel bouton de statut est actif
 let filtreStatutActif = "Tous";
-
 
 // Fonctions d'affichage
 
@@ -250,7 +248,6 @@ function mettreAJourCompteur() {
         '<span>🗓 ' + prevues.length + ' prévues</span>';
 }
 
-
 // Fonction principale : applique filtres + tri et réaffiche
 function rafraichir() {
     // Je lis les valeurs des contrôles
@@ -265,7 +262,8 @@ function rafraichir() {
     if (recherche !== "") {
         liste = liste.filter(function(d) {
             return d.lieu.toLowerCase().includes(recherche)
-                || d.pays.toLowerCase().includes(recherche);
+                || d.pays.toLowerCase().includes(recherche)
+                || d.continent.toLowerCase().includes(recherche);
         });
     }
 
@@ -309,7 +307,6 @@ function rafraichir() {
     mettreAJourCompteur();
 }
 
-
 // Formulaire d'ajout
 
 // Ouvre ou ferme le formulaire d'ajout
@@ -328,7 +325,6 @@ document.querySelector("#btn-toggle-formulaire").addEventListener("click", funct
     }
 });
 
-
 // Vérifie qu'un champ texte/select n'est pas vide
 // Retourne true si le champ est valide, false sinon
 function validerChamp(idChamp, idErreur) {
@@ -346,10 +342,9 @@ function validerChamp(idChamp, idErreur) {
     }
 }
 
-
 // Soumission du formulaire d'ajout
 document.querySelector("#formulaire-ajout").addEventListener("submit", function(event) {
-    // On empêche le rechargement de la page
+    // On empêche l'envoi auto du formulaire
     event.preventDefault();
 
     // On vérifie chaque champ obligatoire
@@ -424,7 +419,6 @@ document.querySelector("#formulaire-ajout").addEventListener("submit", function(
 }
 });
 
-
 // Suppression et modification
 
 // J'écoute les clics sur le conteneur plutôt que sur chaque bouton,
@@ -497,7 +491,6 @@ document.querySelector("#voyage-container").addEventListener("click", function(e
     }
 });
 
-
 // Modale de modification
 
 // Sauvegarde les modifications
@@ -539,7 +532,6 @@ document.querySelector("#formulaire-modif").addEventListener("submit", function(
     idEnCoursDeModif = null;
     rafraichir();
 });
-
 
 // Ferme la modale avec le bouton Annuler
 document.querySelector("#btn-fermer-modale").addEventListener("click", function() {
