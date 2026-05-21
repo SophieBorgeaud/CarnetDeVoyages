@@ -4,20 +4,24 @@
 /* Variables CSS : couleurs, polices, espacements */
 :root {
     /* Couleurs */
-    --couleur-principale:    #1a3a5c;
-    --couleur-secondaire:    #2a5298;
-    --couleur-accent:        #38b2ac;
-    --couleur-fond:          #f5f7fa;
-    --couleur-carte:         #ffffff;
-    --couleur-texte:         #1e2a38;
+    --couleur-principale: #1a3a5c;
+    --couleur-secondaire: #2a5298;
+    --couleur-accent: #38b2ac;
+    --couleur-fond: #f5f7fa;
+    --couleur-carte: #ffffff;
+    --couleur-texte: #1e2a38;
     --couleur-texte-discret: #6b7a8d;
-    --couleur-bordure:       #dde3ec;
+    --couleur-bordure: #dde3ec;
+    --couleur-blanc: #ffffff;
+    --couleur-erreur: #c0392b;
+    --couleur-erreur-clair: #fdf0ef;
+    --couleur-erreur-bordure: #e8b4b0;
 
     /* Couleurs des badges statut */
-    --couleur-prevu-fond:    #e8f4fd;
-    --couleur-prevu-texte:   #1a6fa8;
-    --couleur-visite-fond:   #e6f7f1;
-    --couleur-visite-texte:  #1a7a50;
+    --couleur-prevu-fond: #e8f4fd;
+    --couleur-prevu-texte: #1a6fa8;
+    --couleur-visite-fond: #e6f7f1;
+    --couleur-visite-texte: #1a7a50;
 
     /* Polices */
     --police-titre: 'Playfair Display', Georgia, serif;
@@ -34,6 +38,16 @@
     --arrondi-sm: 6px;
     --arrondi-md: 12px;
     --arrondi-lg: 20px;
+    --arrondi-pill: 999px;
+
+    /* Effets */
+    --degrade-principal: linear-gradient(135deg, var(--couleur-principale), var(--couleur-secondaire));
+    --ombre-carte: 0 4px 16px rgba(26, 58, 92, 0.08);
+    --ombre-carte-hover: 0 10px 30px rgba(26, 58, 92, 0.15);
+    --ombre-modale: 0 10px 40px rgba(26, 58, 92, 0.2);
+    --focus-accent: 0 0 0 3px rgba(56, 178, 172, 0.15);
+    --transition-courte: 0.2s;
+    --transition-moyenne: 0.25s;
 }
 
 /* Reset de base */
@@ -48,27 +62,95 @@ img {
     display: block;
 }
 
-body {
+/* Compatible avec tous les éléments masqués par JS avec .hidden = true */
+[hidden] {
+    display: none !important;
+}
+
+body,
+button,
+input,
+select {
     font-family: var(--police-texte), Arial, sans-serif;
+}
+
+body {
     font-size: 1rem;
     line-height: 1.6;
     color: var(--couleur-texte);
     background-color: var(--couleur-fond);
 }
 
+/* Styles communs */
+header,
+footer {
+    text-align: center;
+    background: var(--degrade-principal);
+}
+
+header,
+header h1,
+.btn-toggle-formulaire,
+.btn-ajouter,
+.btn-filtre.actif,
+.badge-type {
+    color: var(--couleur-blanc);
+}
+
+header h1,
+.formulaire-titre,
+.card-body h3,
+.modale-contenu h2 {
+    font-family: var(--police-titre), Georgia, serif;
+}
+
+.formulaire-section,
+.voyage-card {
+    background: var(--couleur-carte);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: var(--arrondi-md);
+    box-shadow: var(--ombre-carte);
+}
+
+.champ input,
+.champ select,
+#recherche,
+select.tri {
+    color: var(--couleur-texte);
+    border: 2px solid var(--couleur-bordure);
+    outline: none;
+    transition: border-color var(--transition-courte);
+}
+
+.champ input:focus,
+.champ select:focus,
+#recherche:focus {
+    border-color: var(--couleur-accent);
+    box-shadow: var(--focus-accent);
+}
+
+.btn-supprimer,
+.btn-modifier {
+    background: transparent;
+    border-radius: var(--arrondi-sm);
+    padding: 0.4rem 0.85rem;
+    font-size: 0.8rem;
+}
+
+.badge-type,
+.badge-statut {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
 
 /* Header */
 header {
-    text-align: center;
     padding: var(--espace-xl) var(--espace-md) var(--espace-lg);
-    background: linear-gradient(135deg, var(--couleur-principale), var(--couleur-secondaire));
-    color: #ffffff;
 }
 
 header h1 {
-    font-family: var(--police-titre), Georgia, serif;
     font-size: 2.5rem;
-    color: #ffffff;
     margin-bottom: var(--espace-xs);
 }
 
@@ -95,7 +177,6 @@ header p {
     color: rgba(255, 255, 255, 0.95);
 }
 
-
 /* Partie main */
 main {
     max-width: 1200px;
@@ -103,33 +184,23 @@ main {
     padding: var(--espace-lg);
 }
 
-
 /* Formulaire d'ajout de destination */
 .formulaire-section {
-    background: var(--couleur-carte);
-    border: 1px solid var(--couleur-bordure);
-    border-radius: var(--arrondi-md);
     margin-bottom: var(--espace-lg);
-    box-shadow: 0 4px 16px rgba(26, 58, 92, 0.08);
 }
 
 /* Bouton pour ouvrir/refermer le formulaire */
 .btn-toggle-formulaire {
     width: 100%;
     background: var(--couleur-principale);
-    color: #ffffff;
-    border: none;
     border-radius: var(--arrondi-md);
     padding: 0.85rem var(--espace-md);
-    font-family: var(--police-texte), Arial, sans-serif;
     font-size: 1rem;
-    font-weight: 500;
     text-align: left;
-    cursor: pointer;
-    transition: background-color 0.2s;
 }
 
-.btn-toggle-formulaire:hover {
+.btn-toggle-formulaire:hover,
+.btn-ajouter:hover {
     background: var(--couleur-secondaire);
 }
 
@@ -144,15 +215,14 @@ main {
     border-top: 1px solid var(--couleur-bordure);
 }
 
-.formulaire-contenu[hidden] {
-    display: none;
+.formulaire-titre,
+.modale-contenu h2 {
+    color: var(--couleur-principale);
+    margin-bottom: var(--espace-md);
 }
 
 .formulaire-titre {
-    font-family: var(--police-titre), Georgia, serif;
     font-size: 1.2rem;
-    color: var(--couleur-principale);
-    margin-bottom: var(--espace-md);
 }
 
 /* Grille des champs */
@@ -182,37 +252,25 @@ main {
 
 .champ input,
 .champ select {
-    font-family: var(--police-texte), Arial, sans-serif;
     font-size: 0.9rem;
-    color: var(--couleur-texte);
     background: var(--couleur-fond);
-    border: 2px solid var(--couleur-bordure);
     border-radius: var(--arrondi-sm);
     padding: 0.55rem 0.85rem;
-    outline: none;
-    transition: border-color 0.2s;
-}
-
-.champ input:focus,
-.champ select:focus {
-    border-color: var(--couleur-accent);
-    box-shadow: 0 0 0 3px rgba(56, 178, 172, 0.15);
 }
 
 /* Champ invalide */
 .champ input.invalide,
 .champ select.invalide {
-    border-color: #c0392b;
+    border-color: var(--couleur-erreur);
 }
 
 .erreur {
     font-size: 0.78rem;
-    color: #c0392b;
+    color: var(--couleur-erreur);
     min-height: 1rem;
 }
 
-
-/* Barre de contrôles (recherche, filtres, tri)*/
+/* Barre de contrôles : recherche, filtres et tri */
 .controls {
     display: flex;
     flex-wrap: wrap;
@@ -221,60 +279,47 @@ main {
     margin-bottom: var(--espace-lg);
 }
 
+#recherche,
+select.tri {
+    background: var(--couleur-carte);
+    border-radius: var(--arrondi-lg);
+}
+
 #recherche {
     flex: 1;
     min-width: 200px;
     padding: 0.65rem 1rem;
-    font-family: var(--police-texte), Arial, sans-serif;
     font-size: 0.95rem;
-    color: var(--couleur-texte);
-    background: var(--couleur-carte);
-    border: 2px solid var(--couleur-bordure);
-    border-radius: var(--arrondi-lg);
-    outline: none;
-    transition: border-color 0.2s;
 }
 
 #recherche::placeholder {
     color: var(--couleur-texte-discret);
 }
 
-#recherche:focus {
-    border-color: var(--couleur-accent);
-    box-shadow: 0 0 0 3px rgba(56, 178, 172, 0.15);
-}
-
 /* Select tri et filtre type */
 select.tri {
-    font-family: var(--police-texte), Arial, sans-serif;
     font-size: 0.875rem;
-    color: var(--couleur-texte);
-    background: var(--couleur-carte);
-    border: 2px solid var(--couleur-bordure);
-    border-radius: var(--arrondi-lg);
     padding: 0.6rem 1rem;
     cursor: pointer;
-    outline: none;
-    transition: border-color 0.2s;
 }
 
 select.tri:focus {
     border-color: var(--couleur-accent);
 }
 
-
 /* Boutons */
-
-/* Base commune pour tous */
 button {
-    font-family: var(--police-texte), Arial, sans-serif;
     font-size: 0.9rem;
     font-weight: 500;
     border: none;
     border-radius: var(--arrondi-lg);
     cursor: pointer;
     padding: 0.65rem 1.2rem;
-    transition: background-color 0.2s, transform 0.15s;
+    transition:
+            background-color var(--transition-courte),
+            transform 0.15s,
+            border-color var(--transition-courte),
+            color var(--transition-courte);
 }
 
 button:focus-visible {
@@ -282,23 +327,20 @@ button:focus-visible {
     outline-offset: 2px;
 }
 
-/* Bouton principal (ajouter, enregistrer) */
+/* Bouton principal : ajouter, enregistrer */
 .btn-ajouter {
     background: var(--couleur-principale);
-    color: #ffffff;
 }
 
 .btn-ajouter:hover {
-    background: var(--couleur-secondaire);
     transform: translateY(-1px);
 }
 
-/* Boutons filtres statut */
+/* Boutons filtres statut + bouton annuler + bouton réinitialiser */
 .btn-filtre {
     background: var(--couleur-carte);
     color: var(--couleur-texte-discret);
     border: 2px solid var(--couleur-bordure);
-    border-radius: var(--arrondi-lg);
     padding: 0.5rem 1rem;
     font-size: 0.85rem;
 }
@@ -310,41 +352,32 @@ button:focus-visible {
 
 .btn-filtre.actif {
     background: var(--couleur-accent);
-    color: #ffffff;
     border-color: var(--couleur-accent);
 }
 
-/* Bouton supprimer (sur chaque carte) */
+/* Bouton supprimer : sur chaque carte */
 .btn-supprimer {
-    background: transparent;
-    color: #c0392b;
-    border: 2px solid #e8b4b0;
-    border-radius: var(--arrondi-sm);
-    padding: 0.4rem 0.85rem;
-    font-size: 0.8rem;
+    color: var(--couleur-erreur);
+    border: 2px solid var(--couleur-erreur-bordure);
 }
 
 .btn-supprimer:hover {
-    background: #fdf0ef;
-    border-color: #c0392b;
+    background: var(--couleur-erreur-clair);
+    border-color: var(--couleur-erreur);
 }
 
-/* Bouton modifier (sur chaque carte) */
+/* Bouton modifier : sur chaque carte */
 .btn-modifier {
-    background: transparent;
     color: var(--couleur-principale);
     border: 2px solid var(--couleur-bordure);
-    border-radius: var(--arrondi-sm);
-    padding: 0.4rem 0.85rem;
-    font-size: 0.8rem;
 }
 
 .btn-modifier:hover {
-    background: #e8f4fd;
+    background: var(--couleur-prevu-fond);
     border-color: var(--couleur-principale);
 }
 
-/* Message de confirmation (ajout / suppression) */
+/* Message de confirmation : ajout / suppression */
 .message-confirmation {
     background: var(--couleur-visite-fond);
     color: var(--couleur-visite-texte);
@@ -356,8 +389,6 @@ button:focus-visible {
 }
 
 /* Grille de destinations */
-
-/* Mobile : 1 colonne */
 .voyage-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -366,19 +397,15 @@ button:focus-visible {
 
 /* Carte */
 .voyage-card {
-    background: var(--couleur-carte);
-    border: 1px solid var(--couleur-bordure);
-    border-radius: var(--arrondi-md);
     overflow: hidden;
-    box-shadow: 0 4px 16px rgba(26, 58, 92, 0.08);
-    transition: transform 0.25s, box-shadow 0.25s;
+    transition: transform var(--transition-moyenne), box-shadow var(--transition-moyenne);
     display: flex;
     flex-direction: column;
 }
 
 .voyage-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(26, 58, 92, 0.15);
+    box-shadow: var(--ombre-carte-hover);
 }
 
 /* Image */
@@ -391,7 +418,6 @@ button:focus-visible {
     width: 100%;
     height: 180px;
     object-fit: cover;
-    display: block;
     transition: transform 0.3s;
 }
 
@@ -399,19 +425,15 @@ button:focus-visible {
     transform: scale(1.04);
 }
 
-/* Badge type (affiché sur l'image) */
+/* Badge type : affiché sur l'image */
 .badge-type {
     position: absolute;
     top: var(--espace-sm);
     left: var(--espace-sm);
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
     letter-spacing: 0.06em;
     padding: 0.25rem 0.65rem;
     border-radius: var(--arrondi-sm);
     background: rgba(26, 58, 92, 0.82);
-    color: #ffffff;
 }
 
 /* Corps de la carte */
@@ -431,7 +453,6 @@ button:focus-visible {
 }
 
 .card-body h3 {
-    font-family: var(--police-titre), Georgia, serif;
     font-size: 1.15rem;
     color: var(--couleur-texte);
 }
@@ -451,7 +472,7 @@ button:focus-visible {
     margin-bottom: var(--espace-sm);
 }
 
-/* Footer de la carte (boutons modifier et supprimer) */
+/* Footer de la carte : boutons modifier et supprimer */
 .card-footer {
     display: flex;
     justify-content: flex-end;
@@ -464,12 +485,9 @@ button:focus-visible {
 /* Badges statut */
 .badge-statut {
     display: inline-block;
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
     letter-spacing: 0.05em;
     padding: 0.2rem 0.6rem;
-    border-radius: 999px;
+    border-radius: var(--arrondi-pill);
     white-space: nowrap;
 }
 
@@ -493,7 +511,6 @@ button:focus-visible {
     font-size: 1.1rem;
 }
 
-
 /* Fenêtre modale de modification */
 .modale-overlay {
     position: fixed;
@@ -505,26 +522,19 @@ button:focus-visible {
     z-index: 100;
 }
 
-.modale-overlay[hidden] {
-    display: none;
-}
-
 .modale-contenu {
     background: var(--couleur-carte);
     border-radius: var(--arrondi-md);
     padding: var(--espace-lg);
     width: 90%;
+    max-width: 500px;
     max-height: 90vh;
     overflow-y: auto;
-    max-width: 500px;
-    box-shadow: 0 10px 40px rgba(26, 58, 92, 0.2);
+    box-shadow: var(--ombre-modale);
 }
 
 .modale-contenu h2 {
-    font-family: var(--police-titre), Georgia, serif;
     font-size: 1.3rem;
-    color: var(--couleur-principale);
-    margin-bottom: var(--espace-md);
 }
 
 .modale-contenu .champ {
@@ -538,16 +548,12 @@ button:focus-visible {
     margin-top: var(--espace-md);
 }
 
-
 /* Footer */
 footer {
-    text-align: center;
     padding: var(--espace-md);
-    background: linear-gradient(135deg, var(--couleur-principale), var(--couleur-secondaire));
     color: rgba(255, 255, 255, 0.8);
     font-size: 0.85rem;
 }
-
 
 /* Utilitaires */
 
@@ -564,7 +570,6 @@ footer {
     border: 0;
 }
 
-
 /* Responsive tablette : 2 colonnes (≥ 640px) */
 @media (min-width: 640px) {
     .voyage-grid {
@@ -575,7 +580,6 @@ footer {
         font-size: 3rem;
     }
 }
-
 
 /* Responsive desktop : 3 colonnes (≥ 1024px) */
 @media (min-width: 1024px) {
@@ -596,14 +600,12 @@ footer {
     }
 }
 
-
 /* Responsive grand écran : 4 colonnes (≥ 1280px) */
 @media (min-width: 1280px) {
     .voyage-grid {
         grid-template-columns: repeat(4, 1fr);
     }
 }
-
 
 /* Responsive formulaire mobile : 1 colonne (≤ 640px) */
 @media (max-width: 640px) {

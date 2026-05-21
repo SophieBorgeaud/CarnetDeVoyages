@@ -1,8 +1,7 @@
 "use strict";
 
 // Données : mon tableau d'objets destinations
-
-const destinations = [
+let destinations = [
     {
         id: 1,
         lieu: "Athènes",
@@ -141,7 +140,7 @@ let prochainId = 14;
 // Id de la destination qu'on est en train de modifier (modale)
 let idEnCoursDeModif = null;
 
-// --- Filtre actif (statut) ---
+// Filtre actif (statut)
 // Je garde en mémoire quel bouton de statut est actif
 let filtreStatutActif = "Tous";
 
@@ -168,7 +167,7 @@ function creerCarteHTML(destination) {
 
     // Retour du HTML avec template literal
     return `
-        <article class="voyage-card">
+        <article class="voyage-card" data-id="${destination.id}">
 
             <div class="card-image-wrapper">
                 <img src="${destination.image}" alt="Photo de ${destination.lieu}">
@@ -228,7 +227,6 @@ function afficherDestinations(liste) {
     grille.innerHTML = html;
 }
 
-
 // Met à jour le compteur dans le header
 function mettreAJourCompteur() {
     const total = destinations.length;
@@ -248,10 +246,10 @@ function mettreAJourCompteur() {
         '<span>🗓 ' + prevues.length + ' prévues</span>';
 }
 
-// Fonction principale : applique filtres + tri et réaffiche
+// Fonction principale : applique filtres + tri et réaffichage
 function rafraichir() {
     // Je lis les valeurs des contrôles
-    const recherche = document.querySelector("#recherche").value.toLowerCase();
+    const recherche = document.querySelector("#recherche").value.trim().toLowerCase();
     const filtreType = document.querySelector("#filtre-type").value;
     const critereTri = document.querySelector("#tri").value;
 
@@ -267,7 +265,7 @@ function rafraichir() {
         });
     }
 
-    // 2. Filtre par status
+    // 2. Filtre par statut (Tous / Prévu / Visité)
     if (filtreStatutActif !== "Tous") {
         liste = liste.filter(function(d) {
             return d.statut === filtreStatutActif;
@@ -294,7 +292,7 @@ function rafraichir() {
                 return a.continent.localeCompare(b.continent, "fr");
             }
             if (critereTri === "date") {
-                return a.date - b.date;
+                return Number(a.date || 9999) - Number(b.date || 9999);
             }
             if (critereTri === "statut") {
                 return a.statut.localeCompare(b.statut, "fr");
@@ -425,28 +423,30 @@ document.querySelector("#formulaire-ajout").addEventListener("submit", function(
 // parce que les boutons sont créés dynamiquement (ils n'existent pas au chargement)
 document.querySelector("#voyage-container").addEventListener("click", function(event) {
 
-    // Suppression
-    if (event.target.classList.contains("btn-supprimer")) {
-        const id = Number(event.target.dataset.id);
+// Suppression
+    const boutonSupprimer = event.target.closest(".btn-supprimer");
 
-        // Trouver la destination dans le tableau
-        let indexASupprimer = -1;
-        for (let i = 0; i < destinations.length; i++) {
-            if (destinations[i].id === id) {
-                indexASupprimer = i;
-            }
-        }
+    if (boutonSupprimer !== null) {
+        const id = Number(boutonSupprimer.dataset.id);
 
-        if (indexASupprimer !== -1) {
-            const nomDestination = destinations[indexASupprimer].lieu;
+        // Je retrouve la destination à supprimer
+        const destinationASupprimer = destinations.find(function(destination) {
+            return destination.id === id;
+        });
+
+        if (destinationASupprimer !== undefined) {
+            const nomDestination = destinationASupprimer.lieu;
 
             // Je demande une confirmation avant de supprimer
             if (!confirm("Supprimer " + nomDestination + " ?")) {
                 return;
             }
 
+            // Je garde toutes les destinations sauf celle à supprimer
+            destinations = destinations.filter(function(destination) {
+                return destination.id !== id;
+            });
 
-            destinations.splice(indexASupprimer, 1);
             rafraichir();
 
             // On affiche un message de confirmation pendant 3 secondes
@@ -461,18 +461,17 @@ document.querySelector("#voyage-container").addEventListener("click", function(e
     }
 
     // Ouverture de la modale
-    if (event.target.classList.contains("btn-modifier")) {
-        const id = Number(event.target.dataset.id);
+    const boutonModifier = event.target.closest(".btn-modifier");
+
+    if (boutonModifier !== null) {
+        const id = Number(boutonModifier.dataset.id);
 
         // Je retrouve la destination à modifier
-        let destinationAModifier = null;
-        for (let i = 0; i < destinations.length; i++) {
-            if (destinations[i].id === id) {
-                destinationAModifier = destinations[i];
-            }
-        }
+        const destinationAModifier = destinations.find(function(destination) {
+            return destination.id === id;
+        });
 
-        if (destinationAModifier !== null) {
+        if (destinationAModifier !== undefined) {
             // Je mémorise l'id qu'on modifie
             idEnCoursDeModif = id;
 
@@ -509,15 +508,11 @@ document.querySelector("#formulaire-modif").addEventListener("submit", function(
     document.querySelector("#modif-date").classList.remove("invalide");
 
     // Je retrouve la destination grâce à l'id mémorisé
-    let destinationAModifier = null;
-    for (let i = 0; i < destinations.length; i++) {
-        if (destinations[i].id === idEnCoursDeModif) {
-            destinationAModifier = destinations[i];
-        }
-    }
+    const destinationAModifier = destinations.find(function(destination) {
+        return destination.id === idEnCoursDeModif;
+    });
 
-    if (destinationAModifier !== null) {
-        // Je mets à jour les propriétés de l'objet
+    if (destinationAModifier !== undefined) {
         destinationAModifier.lieu = document.querySelector("#modif-lieu").value.trim();
         destinationAModifier.pays = document.querySelector("#modif-pays").value.trim();
         destinationAModifier.continent = document.querySelector("#modif-continent").value;
@@ -538,7 +533,6 @@ document.querySelector("#btn-fermer-modale").addEventListener("click", function(
     document.querySelector("#modale").hidden = true;
     idEnCoursDeModif = null;
 });
-
 
 // Filtres, recherche et tri
 
