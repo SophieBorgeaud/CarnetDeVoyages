@@ -24,9 +24,16 @@ https://sophieborgeaud.github.io/CarnetDeVoyages/
 
 ## Captures d'écrans
 
-![Accueil du site](screenshots/Screenshot_Site.png)
+#### Accueil du site avec les cartes de destinations, les options de tri, de recherche et de filtrage sur ordinateur et mobile.
+<img src="screenshots/Screenshot_Site.png" alt="Accueil du site" width="600">
+<img src="screenshots/Screenshot_Site_Mobile.png" alt="Accueil du site sur mobile" width="250">
 
-![Formulaire d'ajout](screenshots/Screenshot_FormulaireAjout.png)
+#### Formulaire d'ajout d'une nouvelle destination, avec les champs pour le lieu, le pays, le continent, le type, le statut et la date prévue. Sur ordinateur et mobile.
+<img src="screenshots/Screenshot_FormulaireAjout.png" alt="Formulaire d'ajout" width="600">
+<img src="screenshots/Screenshot_Ajout_Mobile.png" alt="Formulaire d'ajout sur mobile" width="250">
+
+#### Aperçu du tri par lieu, pays, continent, date et statut, ainsi que de la recherche en temps réel et des filtres par statut et type.
+<img src="screenshots/Screenshot_Filtre.png" alt="Formulaire d'ajout sur mobile" width="600">
 
 ## Transparence IA
 

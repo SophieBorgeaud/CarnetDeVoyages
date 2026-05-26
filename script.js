@@ -137,12 +137,15 @@ let destinations = [
 // Compteur pour créer des ids uniques quand on ajoute une destination
 let prochainId = 14;
 
-// Id de la destination qu'on est en train de modifier (modale)
+// Id de la destination qui est en cours de modification (modale)
 let idEnCoursDeModif = null;
 
 // Filtre actif (statut)
 // Je garde en mémoire quel bouton de statut est actif
 let filtreStatutActif = "Tous";
+
+// Classes CSS utilisées en JavaScript
+const classeInvalide = "classeInvalide";
 
 // Fonctions d'affichage
 
@@ -167,16 +170,16 @@ function creerCarteHTML(destination) {
 
     // Retour du HTML avec template literal
     return `
-        <article class="voyage-card" data-id="${destination.id}">
+        <article class="carte-voyage" data-id="${destination.id}">
 
-            <div class="card-image-wrapper">
+            <div class="carte-image">
                 <img src="${destination.image}" alt="Photo de ${destination.lieu}">
                 <span class="badge-type">${destination.type}</span>
             </div>
 
-            <div class="card-body">
+            <div class="carte-entete">
 
-                <div class="card-header-row">
+                <div class="carte-header-row">
                     <h3>${destination.lieu}</h3>
 
                     <span class="badge-statut ${classeStatut}">
@@ -184,13 +187,13 @@ function creerCarteHTML(destination) {
                     </span>
                 </div>
 
-                <p class="card-pays">
+                <p class="carte-pays">
                     ${destination.pays} — ${destination.continent}
                 </p>
 
-                ${texteDate !== ""? `<p class="card-date">${texteDate}</p>`: ""}
+                ${texteDate !== ""? `<p class="carte-date">${texteDate}</p>`: ""}
 
-                <div class="card-footer">
+                <div class="carte-footer">
                     <button class="btn-modifier" data-id="${destination.id}">
                         ✏️ Modifier
                     </button>
@@ -210,13 +213,13 @@ function creerCarteHTML(destination) {
 function afficherDestinations(liste) {
     const grille = document.querySelector("#voyage-container");
 
-    // Si aucun résultat, on affiche un message
+    // Si aucun résultat, affiche un message
     if (liste.length === 0) {
         grille.innerHTML = '<p class="message-vide">Aucune destination trouvée 🌍</p>';
         return;
     }
 
-    // On construit tout le HTML d'abord dans une variable
+    // Construction de tout le HTML d'abord dans une variable
     let html = "";
 
     for (const destination of liste) {
@@ -231,19 +234,19 @@ function afficherDestinations(liste) {
 function mettreAJourCompteur() {
     const total = destinations.length;
 
-    // Je filtre pour compter les visitées et les prévues
-    const visitees = destinations.filter(function(d) {
-        return d.statut === "Visité";
-    });
+    // Je compte les destinations visitées et les prévues
+    let nbVisitees = 0;
+    let nbPrevues = 0;
 
-    const prevues = destinations.filter(function(d) {
-        return d.statut === "Prévu";
-    });
+    for (const d of destinations) {
+        if (d.statut === "Visité") nbVisitees++;
+        else if (d.statut === "Prévu") nbPrevues++;
+    }
 
     document.querySelector("#compteur").innerHTML =
         '<span>🌍 ' + total + ' destinations</span>' +
-        '<span>✅ ' + visitees.length + ' visitées</span>' +
-        '<span>🗓 ' + prevues.length + ' prévues</span>';
+        '<span>✅ ' + nbVisitees + ' visitées</span>' +
+        '<span>🗓 ' + nbPrevues + ' prévues</span>';
 }
 
 // Fonction principale : applique filtres + tri et réaffichage
@@ -256,7 +259,7 @@ function rafraichir() {
     // Je pars de tout le tableau
     let liste = destinations;
 
-    // 1. Filtre par recherche (lieu ou pays)
+    // Filtre par recherche (lieu ou pays)
     if (recherche !== "") {
         liste = liste.filter(function(d) {
             return d.lieu.toLowerCase().includes(recherche)
@@ -265,21 +268,21 @@ function rafraichir() {
         });
     }
 
-    // 2. Filtre par statut (Tous / Prévu / Visité)
+    // Filtre par statut (Tous / Prévu / Visité)
     if (filtreStatutActif !== "Tous") {
         liste = liste.filter(function(d) {
             return d.statut === filtreStatutActif;
         });
     }
 
-    // 3. Filtre par type
+    // Filtre par type
     if (filtreType !== "") {
         liste = liste.filter(function(d) {
             return d.type === filtreType;
         });
     }
 
-    // 4. Tri : je fais une copie avec slice() pour ne pas modifier le tableau original
+    // Tri : je fais une copie avec slice() pour ne pas modifier le tableau original
     if (critereTri !== "") {
         liste = liste.slice().sort(function(a, b) {
             if (critereTri === "lieu") {
@@ -330,11 +333,11 @@ function validerChamp(idChamp, idErreur) {
     const erreur = document.querySelector("#" + idErreur);
 
     if (champ.value.trim() === "") {
-        champ.classList.add("invalide");
+        champ.classList.add("classeInvalide");
         erreur.textContent = "Ce champ est obligatoire.";
         return false;
     } else {
-        champ.classList.remove("invalide");
+        champ.classList.remove("classeInvalide");
         erreur.textContent = "";
         return true;
     }
@@ -342,10 +345,10 @@ function validerChamp(idChamp, idErreur) {
 
 // Soumission du formulaire d'ajout
 document.querySelector("#formulaire-ajout").addEventListener("submit", function(event) {
-    // On empêche l'envoi auto du formulaire
+    // Empêche l'envoi auto du formulaire
     event.preventDefault();
 
-    // On vérifie chaque champ obligatoire
+    // Vérifie chaque champ obligatoire
     let formulaireValide = true;
 
     if (!validerChamp("champ-lieu", "erreur-lieu")) formulaireValide = false;
@@ -358,21 +361,21 @@ document.querySelector("#formulaire-ajout").addEventListener("submit", function(
         return;
     }
 
-    // On vérifie que l'année n'est pas dans le passé si le statut est "Prévu"
+    // Vérifie que l'année n'est pas dans le passé si le statut est "Prévu"
     const annee = document.querySelector("#champ-date").value;
     const statut = document.querySelector("#champ-statut").value;
     const anneeActuelle = new Date().getFullYear();
 
     if (statut === "Prévu" && annee !== "" && Number(annee) < anneeActuelle) {
-        document.querySelector("#champ-date").classList.add("invalide");
+        document.querySelector("#champ-date").classList.add("classeInvalide");
         document.querySelector("#erreur-date").textContent = "L'année doit être " + anneeActuelle + " ou plus.";
         return;
     }
 
-    // Si l'année est valide, on efface l'éventuel message d'erreur
+    // Si l'année est valide, efface l'éventuel message d'erreur
     document.querySelector("#erreur-date").textContent = "";
 
-    // On crée un nouvel objet avec les valeurs saisies
+    // Crée un nouvel objet avec les valeurs saisies
     const nouvelleDestination = {
         id: prochainId,
         lieu: document.querySelector("#champ-lieu").value.trim(),
@@ -386,10 +389,10 @@ document.querySelector("#formulaire-ajout").addEventListener("submit", function(
 
     prochainId++;
 
-    // On ajoute la destination au tableau
+    // Ajoute la destination au tableau
     destinations.push(nouvelleDestination);
 
-    // On remet le formulaire à zéro et on le ferme
+    // Remet le formulaire à zéro et le ferme
     document.querySelector("#formulaire-ajout").reset();
     document.querySelector("#formulaire-contenu").hidden = true;
     document.querySelector("#btn-toggle-formulaire").classList.remove("ouvert");
@@ -406,11 +409,11 @@ document.querySelector("#formulaire-ajout").addEventListener("submit", function(
 
     rafraichir();
 
-    // On fait défiler jusqu'à la dernière carte ajoutée
-    const toutesLesCartes = document.querySelectorAll(".voyage-card");
-    const derniereCard = toutesLesCartes[toutesLesCartes.length - 1];
-    if (derniereCard) {
-        derniereCard.scrollIntoView({
+    // Fait défiler jusqu'à la dernière carte ajoutée
+    const toutesLesCartes = document.querySelectorAll(".carte-voyage");
+    const derniereCarte = toutesLesCartes[toutesLesCartes.length - 1];
+    if (derniereCarte) {
+        derniereCarte.scrollIntoView({
             behavior: "smooth",
             block: "center"
         });
@@ -430,9 +433,7 @@ document.querySelector("#voyage-container").addEventListener("click", function(e
         const id = Number(boutonSupprimer.dataset.id);
 
         // Je retrouve la destination à supprimer
-        const destinationASupprimer = destinations.find(function(destination) {
-            return destination.id === id;
-        });
+        const destinationASupprimer = destinations.find(destination => destination.id === id);
 
         if (destinationASupprimer !== undefined) {
             const nomDestination = destinationASupprimer.lieu;
@@ -443,13 +444,11 @@ document.querySelector("#voyage-container").addEventListener("click", function(e
             }
 
             // Je garde toutes les destinations sauf celle à supprimer
-            destinations = destinations.filter(function(destination) {
-                return destination.id !== id;
-            });
+            destinations = destinations.filter(destination => destination.id !== id);
 
             rafraichir();
 
-            // On affiche un message de confirmation pendant 3 secondes
+            // Affiche un message de confirmation pendant 3 secondes
             const msg = document.querySelector("#message-confirmation");
             msg.textContent = "🗑 " + nomDestination + " a été supprimé.";
             msg.hidden = false;
@@ -467,9 +466,7 @@ document.querySelector("#voyage-container").addEventListener("click", function(e
         const id = Number(boutonModifier.dataset.id);
 
         // Je retrouve la destination à modifier
-        const destinationAModifier = destinations.find(function(destination) {
-            return destination.id === id;
-        });
+        const destinationAModifier = destinations.filter(destination => destination.id !== id);
 
         if (destinationAModifier !== undefined) {
             // Je mémorise l'id qu'on modifie
@@ -502,15 +499,13 @@ document.querySelector("#formulaire-modif").addEventListener("submit", function(
     const anneeActuelle = new Date().getFullYear();
 
     if (statutModif === "Prévu" && anneeModif !== "" && Number(anneeModif) < anneeActuelle) {
-        document.querySelector("#modif-date").classList.add("invalide");
+        document.querySelector("#modif-date").classList.add("classeInvalide");
         return;
     }
-    document.querySelector("#modif-date").classList.remove("invalide");
+    document.querySelector("#modif-date").classList.remove("classeInvalide");
 
     // Je retrouve la destination grâce à l'id mémorisé
-    const destinationAModifier = destinations.find(function(destination) {
-        return destination.id === idEnCoursDeModif;
-    });
+    const destinationAModifier = destinations.find(destination => destination.id === idEnCoursDeModif);
 
     if (destinationAModifier !== undefined) {
         destinationAModifier.lieu = document.querySelector("#modif-lieu").value.trim();
@@ -522,13 +517,13 @@ document.querySelector("#formulaire-modif").addEventListener("submit", function(
         destinationAModifier.image = document.querySelector("#modif-image").value || "images/defaut.jpg";
     }
 
-    // On ferme la modale et on réaffiche
+    // Fermeture de la modale et affichage rafraîchi
     document.querySelector("#modale").hidden = true;
     idEnCoursDeModif = null;
     rafraichir();
 });
 
-// Ferme la modale avec le bouton Annuler
+// Fermeture de la modale avec le bouton Annuler
 document.querySelector("#btn-fermer-modale").addEventListener("click", function() {
     document.querySelector("#modale").hidden = true;
     idEnCoursDeModif = null;
@@ -546,14 +541,14 @@ const boutonsFiltres = document.querySelectorAll(".btn-filtre[data-filtre]");
 
 for (let i = 0; i < boutonsFiltres.length; i++) {
     boutonsFiltres[i].addEventListener("click", function() {
-        // On retire la classe actif de tous les boutons
+        // Retrait de la classe actif de tous les boutons
         for (let j = 0; j < boutonsFiltres.length; j++) {
             boutonsFiltres[j].classList.remove("actif");
         }
-        // On l'ajoute sur le bouton cliqué
+        // Ajout de la classe sur le bouton cliqué
         this.classList.add("actif");
 
-        // On mémorise le filtre actif
+        // Mémorisation du filtre actif
         filtreStatutActif = this.dataset.filtre;
 
         rafraichir();
