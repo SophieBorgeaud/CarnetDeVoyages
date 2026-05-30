@@ -145,7 +145,7 @@ let idEnCoursDeModif = null;
 let filtreStatutActif = "Tous";
 
 // Classes CSS utilisées en JavaScript
-const classeInvalide = "classeInvalide";
+const classeInvalide = "invalide";
 
 // Fonctions d'affichage
 
@@ -283,6 +283,7 @@ function rafraichir() {
     }
 
     // Tri : je fais une copie avec slice() pour ne pas modifier le tableau original
+    // "fr" pour utiliser les règles de tri de la langue française (accents, ordre alphabétique)
     if (critereTri !== "") {
         liste = liste.slice().sort(function(a, b) {
             if (critereTri === "lieu") {
@@ -333,11 +334,11 @@ function validerChamp(idChamp, idErreur) {
     const erreur = document.querySelector("#" + idErreur);
 
     if (champ.value.trim() === "") {
-        champ.classList.add("classeInvalide");
+        champ.classList.add(classeInvalide);
         erreur.textContent = "Ce champ est obligatoire.";
         return false;
     } else {
-        champ.classList.remove("classeInvalide");
+        champ.classList.remove(classeInvalide);
         erreur.textContent = "";
         return true;
     }
@@ -367,7 +368,7 @@ document.querySelector("#formulaire-ajout").addEventListener("submit", function(
     const anneeActuelle = new Date().getFullYear();
 
     if (statut === "Prévu" && annee !== "" && Number(annee) < anneeActuelle) {
-        document.querySelector("#champ-date").classList.add("classeInvalide");
+        document.querySelector("#champ-date").classList.add(classeInvalide);
         document.querySelector("#erreur-date").textContent = "L'année doit être " + anneeActuelle + " ou plus.";
         return;
     }
@@ -439,7 +440,7 @@ document.querySelector("#voyage-container").addEventListener("click", function(e
             const nomDestination = destinationASupprimer.lieu;
 
             // Je demande une confirmation avant de supprimer
-            if (!confirm("Supprimer " + nomDestination + " ?")) {
+            if (!confirm("Voulez-vous vraiment supprimer la destination « " + nomDestination + " » ?")) {
                 return;
             }
 
@@ -466,7 +467,7 @@ document.querySelector("#voyage-container").addEventListener("click", function(e
         const id = Number(boutonModifier.dataset.id);
 
         // Je retrouve la destination à modifier
-        const destinationAModifier = destinations.filter(destination => destination.id !== id);
+        const destinationAModifier = destinations.find(destination => destination.id !== id);
 
         if (destinationAModifier !== undefined) {
             // Je mémorise l'id qu'on modifie
@@ -499,10 +500,10 @@ document.querySelector("#formulaire-modif").addEventListener("submit", function(
     const anneeActuelle = new Date().getFullYear();
 
     if (statutModif === "Prévu" && anneeModif !== "" && Number(anneeModif) < anneeActuelle) {
-        document.querySelector("#modif-date").classList.add("classeInvalide");
+        document.querySelector("#modif-date").classList.add(classeInvalide);
         return;
     }
-    document.querySelector("#modif-date").classList.remove("classeInvalide");
+    document.querySelector("#modif-date").classList.remove(classeInvalide);
 
     // Je retrouve la destination grâce à l'id mémorisé
     const destinationAModifier = destinations.find(destination => destination.id === idEnCoursDeModif);
